@@ -6,7 +6,7 @@ from pytesseract import pytesseract
 import os
 
 # Component used for data extraction from text.
-def extraction(type, link):
+def extract(type, link):
     tmp_type = ""
     if type == 1:  # Article link
         # url = "https://www.gadgetsnow.com/tech-news/india-becomes-the-first-country-in-asia-pacific-to-use-satellite-navigation-to-land-aircrafts/articleshow/91172431.cms"
@@ -37,7 +37,7 @@ def extraction(type, link):
         tmp_type = "PDF"
     elif type == 4:  # Document file
         convert(link, "temp/output.pdf")
-        result = extraction(3, "temp/output.pdf")
+        result = extract(3, "temp/output.pdf")
         os.remove("temp/output.pdf")
         tmp_type = "Document"
     else:

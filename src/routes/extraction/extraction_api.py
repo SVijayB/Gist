@@ -1,5 +1,5 @@
-from flask import Flask, jsonify, request, Blueprint, current_app, redirect, url_for
-from src.routes.extraction import extraction_function
+from flask import Flask, jsonify, request, Blueprint
+from src.components import extraction
 
 extract_bp = Blueprint("extraction", __name__, url_prefix="/extract")
 
@@ -8,5 +8,5 @@ extract_bp = Blueprint("extraction", __name__, url_prefix="/extract")
 def extract():
     type = request.args.get("type")
     link = request.args.get("link")
-    result = extraction_function.extraction(int(type), link)
+    result = extraction.extract(int(type), link)
     return jsonify(result)
