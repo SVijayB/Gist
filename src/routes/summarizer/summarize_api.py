@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request, Blueprint
 from src.components.extraction import extract
 from src.components import summarizer
-import transformers
 
 summarize_bp = Blueprint("summarize", __name__, url_prefix="/summarize")
 
