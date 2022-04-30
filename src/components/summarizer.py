@@ -16,7 +16,10 @@ def summarize(data):
     tmp = tmp.replace("''", "")
     tmp = tmp.replace("\x92", "")
     regex_pattern = r"(?<='summary_text': ' )(.*)(?='})"
-    result = re.search(regex_pattern, tmp).group(0)
+    try:
+        result = re.search(regex_pattern, tmp).group(0)
+    except:
+        result = tmp
     data["summary"] = result
     print("[!] Server logs: Summarized article")
     data = title_generation(data)

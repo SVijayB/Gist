@@ -6,7 +6,7 @@ from src.routes.categorizer import categorizer_api
 api_blueprint = Blueprint("API", __name__, url_prefix="/api/")
 api_blueprint.register_blueprint(extraction_api.extract_bp)
 api_blueprint.register_blueprint(summarize_api.summarize_bp)
-api_blueprint.register_blueprint(categorizer_api.categorize_bp)
+api_blueprint.register_blueprint(categorizer_api.category_bp)
 
 
 @api_blueprint.route("/", methods=["GET"])
