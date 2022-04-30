@@ -4,6 +4,7 @@ import PyPDF2
 from docx2pdf import convert
 from pytesseract import pytesseract
 import os
+import re
 
 # Component used for data extraction from text.
 def extract(type, link):
@@ -25,21 +26,20 @@ def extract(type, link):
         text = pytesseract.image_to_string(img)
         result = text[:-1]
         tmp_type = "Image"
-    elif type == 3:  # PDF file
-        # pdfFileObj = open("example.pdf", "rb")
-        pdfFileObj = open(link, "rb")
-        pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
-        result = ""
-        for i in range(pdfReader.numPages):
-            pageObj = pdfReader.getPage(i)
-            result = result + pageObj.extractText()
-        pdfFileObj.close()
-        tmp_type = "PDF"
-    elif type == 4:  # Document file
-        convert(link, "temp/output.pdf")
-        result = extract(3, "temp/output.pdf")
-        os.remove("temp/output.pdf")
-        tmp_type = "Document"
+    # elif type == 3:  # PDF file
+    #     # pdfFileObj = open("example.pdf", "rb")
+    #     pdfFileObj = open(link, "rb")
+    #     pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+    #     result = ""
+    #     for i in range(pdfReader.numPages):
+    #         pageObj = pdfReader.getPage(i)
+    #         result = result + pageObj.extractText()
+    #     pdfFileObj.close()
+    #     tmp_type = "PDF"
+    # elif type == 4:  # Document file
+    #     convert(link, output_path="temp/output.pdf")
+    #     tmp_type = "Document"
+    #     result = extract(3, "temp/output.pdf")
     else:
         return {"error": "Invalid type"}
 

@@ -8,9 +8,9 @@ from src.components.title_generation import title_generation
 def summarize(data):
     print("[!] Server logs: Summarizer Engine has started")
     text = data["article"]
-    to_tokanize = text
+    to_tokanize = text[:1024]
     summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
-    summarized = summarizer(to_tokanize, min_length=75, max_length=300)
+    summarized = summarizer(to_tokanize)
     tmp = " ".join([str(i) for i in summarized])
     tmp = tmp.replace("{", "")
     tmp = tmp.replace("''", "")
