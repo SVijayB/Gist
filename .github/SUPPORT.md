@@ -12,4 +12,4 @@ If this is your first time contributing to open source or your first time on Git
 
 For more help related to GitHub, check out [GitHub Help](https://help.github.com/en)
 
-Please Read our [Code Of Conduct](https://github.com/Open-Source-Community-VIT-AP/OSC-Template/blob/master/.github/CODE_OF_CONDUCT.md) and our [Contributing](https://github.com/Open-Source-Community-VIT-AP/OSC-Template/blob/master/.github/CONTRIBUTING.md) files for more details.
+Please Read our [Code Of Conduct](https://github.com/SVijayB/Gist/blob/master/.github/CODE_OF_CONDUCT.md) and our [Contributing](https://github.com/SVijayB/Gist/blob/master/.github/CONTRIBUTING.md) files for more details.
