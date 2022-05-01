@@ -28,30 +28,16 @@
 
 ## Motivation
 
-<!--- replace with motivation for your project --->
+Our project focuses on creating an accurate text summarizer for news articles. We developed an API that uses various NLP models to acquire a summary of an entire news article. While the API can be potentially used for various other cases including, Movie and book summaries, e-commerce product review summaries, and so on.
 
-In order to easily to create a new project, we decided to create a template for the all OSC projects.
-This template currently contains the following features:
+Our product Gist focuses on a small part of it for newspaper summarization. This is why we have open-sourced our project for it to be used by people as per their requirements and scope. \
+The main difference between our summarizer and other summarizers already in the market is that ours is an abstractive type rather than extractive, which means, it focuses on creating and framing it's own summaries rather than just focusing on points which are relevant and copy pasting them in the summary.
 
--   Issue templates.
--   Pull request templates.
--   Contributing guidelines.
--   Code of conduct.
--   Requires resources to help people start contributing.
--   README.md file with a basic setup.
-
-Simply search and replace `Gist` with the name of your project.
-Useful comments are added in the README.md file for better understanding.
+Built as part of the NMIT Hacks 2022 (We won second place!).
 
 ## Installation
 
-<!--- Provide instructions on installing the application --->
-
-For the latest stable version, head to [Releases](https://github.com/SVijayB/Gist/releases).
-
-Download and extract the source code.
-
-As an alternative, you could also clone the repository using,
+Firstly, clone the repository using,
 
 <pre>
 git clone https://github.com/SVijayB/Gist
@@ -62,17 +48,24 @@ Once you have the source code, create a virtual environment using the following 
 
 Enter the virtual environment and install dependancies using `pip install -r requirements.txt`.
 
+Your installation is completed and you are all set to use the API.
+
 ## Usage
 
-<!--- Provide instructions on how to use the application after installing it --->
+To launch the file, use the following command, `python3 main.py` in the project folder.
 
-To launch the file, use the following command, `python3 app.py`.
+This should launch the API. Some of the endpoints are as follows,
 
-<!--- You can also add in screenshots, app demo (Gif format) or even provide link to other resources --->
+| ID  | Endpoint        | Example                             | Details                                        |
+| --- | --------------- | ----------------------------------- | ---------------------------------------------- |
+| 1   | [/]             | http://127.0.0.1:5000/              | Index.                                         |
+| 2   | [api/extract]   | http://127.0.0.1:5000/api/extract   | Extracts text data based on the input provided |
+| 3   | [api/summarize] | http://127.0.0.1:5000/api/summarize | GET Summary of the text sent                   |
+| 4   | [api/category]  | http://127.0.0.1:5000/api/category  | GET the category to which the article belongs  |
 
-### Project demo
-
-![Project demo](https://media.giphy.com/media/10zxDv7Hv5RF9C/giphy.gif)
+**Note:** It is mandatory to provide the `type` and `link` parameters in the request. \
+`type`: 1 - Article URL, 2 - Image. \
+`link`: URL of the article or image (Location on your system).
 
 ## Contributing
 
