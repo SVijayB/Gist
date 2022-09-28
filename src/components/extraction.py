@@ -34,7 +34,6 @@ def extract(type, link):
         for i in range(pdfReader.numPages):
              pageObj = pdfReader.getPage(i)
              result = result + pageObj.extractText()
-             print(result)
         pdfFileObj.close()
         tmp_type = "PDF"
     elif type == 4:  # Document file
