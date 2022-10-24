@@ -1,0 +1,55 @@
+
+.api_container{
+background-color: #16181d;
+position: relative;
+width: 100%;
+padding-top: 80px;
+min-height: 100vh;
+display: grid;
+grid-template-columns: 20% auto 10%;
+grid-gap: 20px;
+}
+
+.SideBar_container{
+    position: relative;
+}
+
+.SideBar{
+position: fixed;
+top: 78px;
+left: 0;
+bottom: 0;
+width: 20%;
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: #16181d;
+}
+
+.api_res{
+    min-height: 150vh;
+    width: 100%;
+    background-color: rgba(52, 58, 70, .8);
+    padding: 20px;
+    color: white;
+}
+
+.api_res p{
+    color: white;
+}
+
+.api_content{
+ width: 95%;
+ background-color: rgba(52, 58, 70, .8);
+ padding: 30px;
+ border-radius: 0.5rem;
+}
+
+input{
+    color: #16181d;
+    width: 90%;
+}
+button{
+    color: #16181d;
+    width: 80px;
+}
