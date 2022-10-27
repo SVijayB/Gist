@@ -51,7 +51,8 @@ class GMAIL_EXTRACTOR():
 
     def parseEmails(self):
     	jsonOutput = {}
-    	for anEmail in self.data[0].split():
+    	mails=self.data[0].split()[-10:]
+    	for anEmail in mails:
         	type, self.data = self.mail.fetch(anEmail, '(UID RFC822)')
         	raw = self.data[0][1]
         	raw_str = raw.decode("utf-8")
