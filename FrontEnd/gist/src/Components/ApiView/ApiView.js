@@ -63,11 +63,16 @@ function ApiView(props){
                       <div>ENTER/UPLOAD</div>
                       <div>
                             
-                              < UserFormData type="text" text="URL" onchange={OnChangeHandler} value={Url}/>
-                              <SubMitBtn handler={OnSubmitHandler}/>
-                              <div> OR </div>
-                              < UserFormData type="file" text="FILE" onchange={OnChangeHandlerFile} />
-                              <SubMitBtn handler={FileSubmitHandler}/>
+                             <div className='flexcontainer'> 
+                                 <UserFormData type="text" text="URL" onchange={OnChangeHandler} value={Url}/>
+                                 <SubMitBtn handler={OnSubmitHandler}/>
+                              </div>
+                              <div className='flexcontainer'> OR </div>
+                              <div className='flexcontainer'>
+                                  <UserFormData type="file" text="FILE" onchange={OnChangeHandlerFile} />
+                                  <SubMitBtn handler={FileSubmitHandler}/>
+                              </div>
+                              
                               
                       </div>
                 </div>
@@ -79,13 +84,10 @@ function ApiView(props){
            <div className="api_res">
               <div><h1>TITLE : {Title}</h1></div>
                <div><h3> Summary : {Summary} </h3></div>
-               <p className=''>{post}</p>
+               <p className='post'>{post}</p>
            </div>
         </div>
         
-    <div>
-        
-    </div>
 
    </div>
     
