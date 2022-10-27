@@ -10,3 +10,5 @@ def extract():
     link = request.args.get("link")
     result = extraction.extract(int(type), link)
     return jsonify(result)
+
+
