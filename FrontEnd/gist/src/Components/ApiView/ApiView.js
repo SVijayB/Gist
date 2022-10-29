@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import './ApiView.css'
-
-
+import FileIcon from '../../Images/file_upload_icon.svg'
+import ArticleIcon from '../../Images/article.svg'
+import Upload from './Upload';
 
 const BaseUrl="http://127.0.0.1:5000/api/summarize?"
 
@@ -10,11 +11,79 @@ const BaseUrl="http://127.0.0.1:5000/api/summarize?"
 function ApiView(props){
    const [post, setPost] = useState(null); //returns a array
    const [Url,SetUrl]=useState('');
-   const [Title,SetTitle]=useState(null)
-   const [Summary,Setsummary]=useState(null);
    const [File,SetFile]=useState('');
+   const [Text,setText]=useState('UPLOAD OR ENTER URL')
+   const [Opt,SetOpt]=useState("1")
 
-   function OnChangeHandler(event){
+
+
+
+
+  function SwitchHandler(event){
+    const userinpt=event.target.getAttribute("data-value");
+    SetOpt(userinpt);
+    if(Text==='ENTER URL')
+    setText("Choose document you want to Upload");
+    else
+     setText("ENTER URL");
+  }
+
+  const OnSubmitHandler=(event)=>{
+    event.preventDefault();
+    
+  }
+
+  const OnChangeHandler=(event)=>{
+     if(event.target.id==='Url')
+      SetUrl(event.target.value);
+     else
+      SetFile(event.target.value)
+   
+  }
+  
+ /* useEffect(()=>{
+    console.log(Url)
+  },[Url])
+    useEffect(()=>{
+    console.log("file"+File)
+  },[File]) */
+
+  return(
+  
+    <>
+    <div className='Api_container'>
+        
+        <div className='upload_container'>
+            
+            <div className='upload_header'>
+                <h1>UPLOAD OR ENTER URL</h1>
+                <div >
+                   <img src={FileIcon} alt="File Icon"  data-value="1" onClick={SwitchHandler}/>
+                   <img src={ArticleIcon} alt="Article Icon" data-value="2"onClick={SwitchHandler}/>
+                </div>
+            </div>
+            <div className='upload_playload'>
+
+               <Upload  option={Opt} formsubmission={OnSubmitHandler} url={OnChangeHandler} text={Text}/> 
+               
+            </div>
+
+
+        </div>
+
+    </div>
+    </>
+
+  );
+
+}
+
+
+
+export default ApiView;
+
+/*
+  function OnChangeHandler(event){
         SetUrl(event.target.value);
         console.log("VALUE : "+event.target.value);
    }
@@ -52,65 +121,4 @@ function ApiView(props){
       console.log(e);
     });
    }
-  
-  return(
-   <div className="api_container">
-     
-     <div className="SideBar_container">
-         
-        <div className="SideBar">
-                <div className="api_content">
-                      <div>ENTER/UPLOAD</div>
-                      <div>
-                            
-                             <div className='flexcontainer'> 
-                                 <UserFormData type="text" text="URL" onchange={OnChangeHandler} value={Url}/>
-                                 <SubMitBtn handler={OnSubmitHandler}/>
-                              </div>
-                              <div className='flexcontainer'> OR </div>
-                              <div className='flexcontainer'>
-                                  <UserFormData type="file" text="FILE" onchange={OnChangeHandlerFile} />
-                                  <SubMitBtn handler={FileSubmitHandler}/>
-                              </div>
-                              
-                              
-                      </div>
-                </div>
-        </div>
-
-      </div>
-    
-        <div>
-           <div className="api_res">
-              <div><h1>TITLE : {Title}</h1></div>
-               <div><h3> Summary : {Summary} </h3></div>
-               <p className='post'>{post}</p>
-           </div>
-        </div>
-        
-
-   </div>
-    
-
-  );
-
-}
-
-function UserFormData(props){
-
-  return(
-    <> <div>
-          <label  htmlFor={props.type}>{props.text}</label>
-      </div>
-        <input  value={props.value} id={props.type} name={props.type} type={props.type} onChange={props.onchange} />
-    </>
-  );
-}
-
-function SubMitBtn(props){
-  return <><button type='submit' onClick={props.handler} >SUBMIT</button></>
-}
-
-export default ApiView;
-
-// <button type="submit" onClick={OnSubmitHandler}>SUBMIT</button>
+*/
