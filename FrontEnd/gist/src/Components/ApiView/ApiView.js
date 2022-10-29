@@ -14,6 +14,7 @@ function ApiView(props){
    const [File,SetFile]=useState('');
    const [Text,setText]=useState('UPLOAD OR ENTER URL')
    const [Opt,SetOpt]=useState("1")
+   const [UserHist,SetUserHist]=useState([])
 
 
 
@@ -30,17 +31,34 @@ function ApiView(props){
 
   const OnSubmitHandler=(event)=>{
     event.preventDefault();
-    
+    if(Opt==='1'){
+       const FileObj={
+      name:'WEB',
+     }
+     SetUserHist([FileObj,...UserHist])
+    }else{
+     //file
+     const FileObj={
+      name:File.name,
+      size:File.size,
+      type:File.type
+     }
+     SetUserHist([FileObj,...UserHist])
+     
+    }
   }
 
   const OnChangeHandler=(event)=>{
      if(event.target.id==='Url')
       SetUrl(event.target.value);
      else
-      SetFile(event.target.value)
+      SetFile(event.target.files[0])
    
   }
   
+  useEffect(()=>{
+    console.log(UserHist)
+  },[UserHist])
  /* useEffect(()=>{
     console.log(Url)
   },[Url])
@@ -64,7 +82,7 @@ function ApiView(props){
             </div>
             <div className='upload_playload'>
 
-               <Upload  option={Opt} formsubmission={OnSubmitHandler} url={OnChangeHandler} text={Text}/> 
+               <Upload  option={Opt} formsubmission={OnSubmitHandler} url={OnChangeHandler} text={Text} data={UserHist}/> 
                
             </div>
 

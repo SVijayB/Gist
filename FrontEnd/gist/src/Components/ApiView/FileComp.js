@@ -12,7 +12,7 @@ function FileComp(props){
                 </div>
                 <div className="right">
                     <div className="file_flex">
-                            <div>File Name</div>
+                            <div>{props.filename}</div>
                             <div>Completed</div>
                     </div>
                     <div className="progress_bar">
