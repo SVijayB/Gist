@@ -31,7 +31,7 @@ class GMAIL_EXTRACTOR():
         	if not self.destFolder.endswith("/"): self.destFolder+="/"
         	return True
     	else:
-        	print("\nLogon FAILED")
+        	print("\nLogIn FAILED")
         	return False
 
     def selectMailbox(self):
@@ -47,23 +47,26 @@ class GMAIL_EXTRACTOR():
 
     def checkIfUsersWantsToContinue(self):
     	print("\nWe have found "+str(self.mailCount)+" emails in the mailbox "+self.mailbox+".")
-    	return True if input("Do you wish to continue extracting all the emails into "+self.destFolder+"? (Y/N) ").lower().strip()[:1] == "y" else False
+    	return True if input("Do you wish to continue extracting the recent 10 emails into "+self.destFolder+"? (Y/N) ").lower().strip()[:1] == "y" else False
 
     def parseEmails(self):
-    	jsonOutput = {}
+    	output=[]
     	mails=self.data[0].split()[-10:]
+    	index=0
     	for anEmail in mails:
         	type, self.data = self.mail.fetch(anEmail, '(UID RFC822)')
         	raw = self.data[0][1]
         	raw_str = raw.decode("utf-8")
         	msg = email.message_from_string(raw_str)
-        	jsonOutput['subject'] = msg['subject']
-        	jsonOutput['from'] = msg['from']
-        	jsonOutput['date'] = msg['date']
-        
 	        raw = self.data[0][0]
 	        raw_str = raw.decode("utf-8")
 	        uid = raw_str.split()[2]
+	        index+=1
+	        jsonOutput = {}
+	        jsonOutput['id']= index
+	        jsonOutput['subject'] = msg['subject']
+        	jsonOutput['from'] = msg['from']
+        	jsonOutput['date'] = msg['date']
 	        # Body #
 	        if msg.is_multipart():
 	            for part in msg.walk():
@@ -81,11 +84,12 @@ class GMAIL_EXTRACTOR():
 	                        	f.write(part.get_payload(decode=True))
 	        else:
 	            jsonOutput['body'] = msg.get_payload(decode=True).decode("utf-8") # Non-multipart email, perhaps no attachments or just text.
-	        outputDump = json.dumps(jsonOutput)
-	        emailInfoFilePath = str(self.destFolder)+str(uid)+str("/")+str(uid)+str(".json")
-	        os.makedirs(os.path.dirname(emailInfoFilePath), exist_ok=True)
-	        with open(emailInfoFilePath, "w") as f:
-	        	f.write(outputDump)
+	        output.append(jsonOutput)
+    	outputDump = json.dumps(output)
+    	emailInfoFilePath = str(self.destFolder)+str(self.usr)+str(".json")
+    	os.makedirs(os.path.dirname(emailInfoFilePath), exist_ok=True)
+    	with open(emailInfoFilePath, "w") as f:
+    		f.write(outputDump)
 
     def __init__(self):
 	    self.initializeVariables()
