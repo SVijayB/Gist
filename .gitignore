@@ -162,5 +162,6 @@ temp/
 
 UserFiles
 
-client_secret.json
-client_secret.json/*
+src/routes/Gmail/client_secret.json
+src/routes/Gmail/client_secret.json/*
+
