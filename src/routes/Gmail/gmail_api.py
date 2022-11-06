@@ -8,6 +8,10 @@ from flask import request, Blueprint, redirect
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from src.components import summarizer
+from .serialzer import HeaderParser
+
+
+
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
@@ -21,10 +25,17 @@ flow = InstalledAppFlow.from_client_secrets_file(
 )
 
 
+def decode_base64(data_base64):
+    data = data_base64.replace("-", "+").replace("_", "/")
+    decoded_data = base64.b64decode(data)
+    soup = BeautifulSoup(decoded_data, "lxml")
+    text = soup.text
+    return text
+
+
 @gmail_bp.route("/", methods=["GET"])
 def get_mail():
     authorization_url, state = flow.authorization_url()
-
     return redirect(authorization_url)
 
 
@@ -37,25 +48,32 @@ def user_redirect():
     response = service.users().messages().list(maxResults=5, userId='me').execute()
     try:
         messages = response['messages']
-        responses = {}
-        i = 0
+        responses = []
         for msg in messages:
             gmail = service.users().messages().get(userId='me', id=msg['id']).execute()
             payload = gmail['payload']
+            gmail_text = {}
             try:
-                if payload["mimeType"] == 'text/html':
+                meta_data = HeaderParser(payload['headers'])
+                raw_data=''
+                if payload["mimeType"] == 'text/html' or payload["mimeType"] == 'text/plain':
                     body = payload["body"]
                     data = body['data']
-                    data = data.replace("-", "+").replace("_", "/")
-                    decoded_data = base64.b64decode(data)
-                    soup = BeautifulSoup(decoded_data, "lxml")
-                    text = soup.text
-                    print(text)
-
+                    raw_data=decode_base64(data)
                 else:
-                    pass
-                i = i + 1
-            except Exception:
+                    parts = payload["parts"]
+                    for part in parts:
+                        body = part["body"]
+                        data = body['data']
+                        raw_data += decode_base64(data)
+
+                gmail_text['meta'] = meta_data
+                gmail_text['text'] = raw_data
+                user_summary=summarizer.summarize(gmail_text)
+                print("==*"*50)
+                responses.append(user_summary)
+            except Exception as e:
+                print(e)
                 pass
 
         # print(responses)
