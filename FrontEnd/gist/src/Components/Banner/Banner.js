@@ -31,7 +31,7 @@ function Banner(props){
             <div className="Banner_Container">
                 <Item heading="Summarizer" about={about} clickHandler={RouteHandler.bind(this,"/api")} />
                 <Item heading="GIST" about={about} clickHandler={RouteHandler.bind(this,"/gist")} />
-                <Item heading="Gmail Summarizer" about={about} clickHandler={RouteHandler.bind(this,"/")}/>
+                <Item heading="Gmail Summarizer" about={about} clickHandler={RouteHandler.bind(this,"/gmail")}/>
             </div>
           </div>
         </>
