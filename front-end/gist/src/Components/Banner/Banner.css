@@ -1,0 +1,46 @@
+
+.Banner_Section{
+
+    position: relative;
+    background-color: white;
+    display: flex;
+    width: 100%;
+    min-height: 80vh;
+    
+}
+
+.Banner_Container{
+    width: 70%;
+    position: relative;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.Banner_Section div,p{
+    color: black; 
+}
+.B_text{
+    margin: 10px;
+    border: 4px solid;
+    padding: 5px;
+    border-image-source: radial-gradient(circle at top left,#00b3b3 ,transparent 30%);
+    border-image-slice: 1;
+    position: relative;
+    box-shadow: 0 4px 28px rgb(0 0 0 / 20%);
+    border-radius: 0 20px 0 20px ;
+}
+
+.B_text::after{
+    content: "";
+    border: 4px solid;
+    border-image-source: radial-gradient(circle at bottom right, #00b3b3, transparent 30%);
+    border-image-slice: 1;
+    position: absolute;
+    padding: 5px;
+    top: 0;
+    left: 0;
+    right: -5px;
+    bottom: -5px;
+    margin: 0;
+}
