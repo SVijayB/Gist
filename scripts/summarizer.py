@@ -1,8 +1,8 @@
 import re
-import json
-import requests
-from os import getenv
-from dotenv import load_dotenv
+
+from pytz import unicode
+from transformers import pipeline
+
 from src.components.title_generation import title_generation
 
 
@@ -12,17 +12,9 @@ def summarize(data):
         text = data["article"]
     except KeyError as k:
         text = data["text"]
-    # to_tokanize = text[:1024]
-    API_URL = (
-        "https://api-inference.huggingface.co/models/sshleifer/distilbart-cnn-12-6"
-    )
-    load_dotenv()
-    HF_TOKEN = getenv("HF_TOKEN")
-    headers = {"Authorization": f"Bearer {HF_TOKEN}"}
-    payload = {"inputs": text, "min_length": 100, "max_length": 300}
-    response = requests.request("POST", API_URL, headers=headers, data=payload)
-    summarized = json.loads(response.content.decode("utf-8"))
-
+    to_tokanize = text[:1024]
+    summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+    summarized = summarizer(to_tokanize)
     tmp = " ".join([str(i) for i in summarized])
     tmp = tmp.replace("{", "")
     tmp = tmp.replace("''", "")
