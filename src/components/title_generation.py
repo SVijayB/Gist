@@ -1,36 +1,28 @@
-import torch
-from transformers import T5ForConditionalGeneration, T5Tokenizer
+from dotenv import load_dotenv
+import requests
 import re
+import json
+from os import getenv
 
 
 def title_generation(data):
-    print("[!] Server logs: Title generation has started")
     try:
-        text = data["article"]
-    except KeyError as k:
-        text = data["text"]
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = T5ForConditionalGeneration.from_pretrained(
-        "Michau/t5-base-en-generate-headline"
-    )
-    tokenizer = T5Tokenizer.from_pretrained("Michau/t5-base-en-generate-headline")
-    model = model.to(device)
-    encoding = tokenizer.encode_plus(text, return_tensors="pt")
-    input_ids = encoding["input_ids"].to(device)
-    attention_masks = encoding["attention_mask"].to(device)
+        print("[!] Server logs: Title generation has started")
+        try:
+            text = data["article"]
+        except KeyError as k:
+            text = data["text"]
+        API_URL = "https://api-inference.huggingface.co/models/Michau/t5-base-en-generate-headline"
+        text = {"inputs": f"{text}"}
+        load_dotenv()
+        HF_TOKEN = getenv("HF_TOKEN")
+        headers = {"Authorization": f"Bearer {HF_TOKEN}"}
+        response = requests.post(API_URL, headers=headers, json=text)
+        result = json.loads(response.content.decode("utf-8"))
+        result = result[0]["generated_text"]
+        print("[!] Server logs: Title generation completed")
 
-    beam_outputs = model.generate(
-        input_ids=input_ids,
-        attention_mask=attention_masks,
-        max_length=64,
-        num_beams=3,
-        early_stopping=True,
-    )
-
-    result = tokenizer.decode(beam_outputs[0])
-    print("[!] Server logs: Title generation completed")
-
-    regex_pattern = r"(?<=<pad> )(.*)(?=</s>)"
-    result = re.search(regex_pattern, result).group(0)
-    data["title"] = result
+        data["title"] = result
+    except:
+        data["title"] = "Title Generation Failed"
     return data
