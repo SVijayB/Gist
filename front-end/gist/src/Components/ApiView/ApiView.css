@@ -1,0 +1,178 @@
+.Api_container{
+    width: 100%;
+    height: 100%;
+    background-color:#16181d;
+    min-height:calc(100vh - 78px);
+    position: relative;
+    top: 78px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+
+
+.upload_container{
+    width: 80%;
+    height: 80vh;
+    position: relative;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.8rem;
+}
+
+.upload_container *{
+    color: #16181d;
+}
+
+.upload_header >h1{
+    padding: 10px;
+}
+.upload_header{
+    display: flex;
+    justify-content: space-between;
+}
+.upload_header img{
+    width: 100%;
+    height: 48px;
+    padding: 10px;
+    transform: translateY(-5px);
+    border-radius: 10px;
+    border: #16181d solid;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.upload_header > div{
+    display: flex;
+    padding-right: 20px;
+    align-items: center;
+   
+}
+.upload_playload{
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    padding-top: 0;
+    transform: translateY(-18px);
+}
+.file_upload{
+    width: 100%;
+}
+
+#upload_flex{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+#upload_flex>div{
+    flex: 1;
+    margin-right: 10px;
+    margin : 20px ;
+}
+#upload_flex .upload_btn_container:first-child{
+     border: 2px #16181d dashed;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+
+#file{
+    width: 80px;
+    height: 80px;
+    margin: 20px 0;
+}
+.File_container{
+    position: relative;
+    display: flex;
+    width: 98%;
+    height:100px;
+    border: 1px solid;
+    border-radius: 5px;
+    margin: 4px 0;
+    border-image-slice: 1;
+   
+}
+
+
+.left {
+    width: 100px;
+   display: flex;
+   justify-content: center;
+}
+.left img{
+    width: 60px;
+    height: 60px;
+    margin: auto;
+}
+.right{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    
+}
+.right .file_flex{
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+.progress_bar{
+    border-bottom: dotted 2px black;
+}
+.file_scroll{
+    position: relative;
+    height: 100%;
+    bottom: 0;
+    right: 0;
+ 
+}
+.Upload_History{
+    overflow: auto;
+}
+
+.api_form{
+    display: flex;
+    flex-direction: column;
+}
+.api_form >*{
+    margin: 10px 0;
+}
+
+#Url{
+    border: 2px solid black;
+    transition: 0.5s;
+}
+
+#Url:focus{
+    border: 2px solid #555;
+}
+
+/*========================================================================================================================*/
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #444950;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+    width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #444950;
+    border-radius: 8px;
+    border: 4px solid rgba(52, 58, 70, .8);
+}
+

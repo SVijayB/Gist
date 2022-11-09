@@ -1,0 +1,13 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: white;
+}
+
+.About_container{
+background-color: #16181d;
+height: 100vh;
+width: 100%;
+padding-top: 80px;
+}
