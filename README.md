@@ -5,17 +5,7 @@
     <br>Gist: Less is more | A text summarizer
 </p>
 
-----
-
-[![GitHub pull-requests](https://img.shields.io/github/issues-pr/SVijayB/Gist.svg)](https://github.com/SVijayB/Gist/pulls)
-[![GitHub issues](https://img.shields.io/github/issues/SVijayB/Gist.svg)](https://github.com/SVijayB/Gist/issues)
-[![GitHub contributors](https://img.shields.io/github/contributors/SVijayB/Gist.svg)](https://github.com/SVijayB/Gist/graphs/contributors)
-
-[![GitHub license](https://img.shields.io/github/license/SVijayB/Gist)](https://github.com/SVijayB/Gist/blob/master/LICENSE)
-[![GitHub repo size](https://img.shields.io/github/repo-size/SVijayB/Gist)](https://github.com/SVijayB/Gist)
-
-[![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat)](https://github.com/SVijayB/Gist/blob/master/.github/CODE_OF_CONDUCT.md)
-[![Open Source Love svg1](https://img.shields.io/static/v1?label=Open&message=Source%20%E2%9D%A4%EF%B8%8F&color=blueviolet)](https://github.com/SVijayB/Gist/blob/master/.github/CONTRIBUTING.md)
+---
 
 ## Table of Contents
 
@@ -77,4 +67,4 @@ Also, thanks for contributing to Open-source!
 
 Gist is under The MIT License. Read the [LICENSE](https://github.com/SVijayB/Gist/blob/master/LICENSE) file for more information.
 
-----
+---
