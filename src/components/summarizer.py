@@ -19,8 +19,8 @@ def summarize(data):
     load_dotenv()
     HF_TOKEN = getenv("HF_TOKEN")
     headers = {"Authorization": f"Bearer {HF_TOKEN}"}
-    text = json.dumps(text)
-    response = requests.request("POST", API_URL, headers=headers, data=text)
+    payload = {"inputs": text, "min_length": 100, "max_length": 300}
+    response = requests.request("POST", API_URL, headers=headers, data=payload)
     summarized = json.loads(response.content.decode("utf-8"))
 
     tmp = " ".join([str(i) for i in summarized])
