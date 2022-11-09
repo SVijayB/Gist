@@ -11,17 +11,16 @@ from src.components import summarizer
 from .serialzer import HeaderParser
 
 
-
-
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
 gmail_bp = Blueprint("gmail", __name__, url_prefix="/gist")
-SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
+SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
 flow = InstalledAppFlow.from_client_secrets_file(
-    CURR_DIR + '\\client_secret.json', SCOPES,
-    redirect_uri="http://127.0.0.1:5000/api/gist/callback"
+    CURR_DIR + "\\client_secret.json",
+    SCOPES,
+    redirect_uri="http://127.0.0.1:5000/api/gist/callback",
 )
 
 
@@ -44,33 +43,36 @@ def user_redirect():
     flow.fetch_token(authorization_response=request.url)
     credentials = flow.credentials
     print(credentials)
-    service = build('gmail', 'v1', credentials=credentials)
-    response = service.users().messages().list(maxResults=5, userId='me').execute()
+    service = build("gmail", "v1", credentials=credentials)
+    response = service.users().messages().list(maxResults=5, userId="me").execute()
     try:
-        messages = response['messages']
+        messages = response["messages"]
         responses = []
         for msg in messages:
-            gmail = service.users().messages().get(userId='me', id=msg['id']).execute()
-            payload = gmail['payload']
+            gmail = service.users().messages().get(userId="me", id=msg["id"]).execute()
+            payload = gmail["payload"]
             gmail_text = {}
             try:
-                meta_data = HeaderParser(payload['headers'])
-                raw_data=''
-                if payload["mimeType"] == 'text/html' or payload["mimeType"] == 'text/plain':
+                meta_data = HeaderParser(payload["headers"])
+                raw_data = ""
+                if (
+                    payload["mimeType"] == "text/html"
+                    or payload["mimeType"] == "text/plain"
+                ):
                     body = payload["body"]
-                    data = body['data']
-                    raw_data=decode_base64(data)
+                    data = body["data"]
+                    raw_data = decode_base64(data)
                 else:
                     parts = payload["parts"]
                     for part in parts:
                         body = part["body"]
-                        data = body['data']
+                        data = body["data"]
                         raw_data += decode_base64(data)
 
-                gmail_text['meta'] = meta_data
-                gmail_text['text'] = raw_data
-                user_summary=summarizer.summarize(gmail_text)
-                print("==*"*50)
+                gmail_text["meta"] = meta_data
+                gmail_text["text"] = raw_data
+                user_summary = summarizer.summarize(gmail_text)
+                print("==*" * 50)
                 responses.append(user_summary)
             except Exception as e:
                 print(e)
