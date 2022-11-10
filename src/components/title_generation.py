@@ -23,6 +23,7 @@ def title_generation(data):
         print("[!] Server logs: Title generation completed")
 
         data["title"] = result
-    except:
+    except Exception as e:
+        print(e)
         data["title"] = "Title Generation Failed"
     return data
