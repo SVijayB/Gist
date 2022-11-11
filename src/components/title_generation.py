@@ -8,10 +8,7 @@ from os import getenv
 def title_generation(data):
     try:
         print("[!] Server logs: Title generation has started")
-        try:
-            text = data["article"]
-        except KeyError as k:
-            text = data["text"]
+        text = data["content"]
         API_URL = "https://api-inference.huggingface.co/models/Michau/t5-base-en-generate-headline"
         text = {"inputs": f"{text}"}
         load_dotenv()

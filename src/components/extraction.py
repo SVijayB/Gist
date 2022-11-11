@@ -43,4 +43,4 @@ def extract(type, link):
     else:
         return {"error": "Invalid type"}
 
-    return {"type": tmp_type, "link": link, "article": result}
+    return {"type": tmp_type, "link": link, "content": result}
