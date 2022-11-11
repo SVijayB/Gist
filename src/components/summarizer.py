@@ -11,7 +11,7 @@ def summarize(data):
     try:
         text = data["article"]
     except KeyError as k:
-        text = data['text']
+        text = data["text"]
     to_tokanize = text[:1024]
     summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
     summarized = summarizer(to_tokanize)
