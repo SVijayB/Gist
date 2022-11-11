@@ -1,17 +1,20 @@
 from docx import Document
 from docx2pdf import convert
 from datetime import datetime
+import pythoncom
 import os
 import re
+import win32com.client
 
 
 def result_generation(data):
+    print("[!] Server logs: Result Generation started")
     document = Document()
 
     p = document.add_paragraph()
     p = p.insert_paragraph_before("                    ")
     r = p.add_run()
-    r.add_picture("report_logo.jpeg")
+    r.add_picture("assets/report_logo.jpeg")
 
     ID = open("assets/ID.txt", "r").read()
     now = datetime.now()
@@ -56,16 +59,18 @@ def result_generation(data):
     document.add_heading("Content Extracted", 1)
     document.add_paragraph(data["content"])
 
-    document.add_heading("Summary Generated", 1)
-    document.add_paragraph(data["summary"])
-
     document.add_heading("Title Generated", 1)
     document.add_paragraph(data["title"])
+
+    document.add_heading("Summary Generated", 1)
+    document.add_paragraph(data["summary"])
+    document.add_paragraph("                              ")
     document.add_paragraph(
         "======================================================================"
     )
-
+    xl = win32com.client.Dispatch("Word.Application", pythoncom.CoInitialize())
     doc_location = "temp\Result_{num:0>4}.docx".format(num=str(ID))
     document.save(doc_location)
     convert(doc_location, output_path="temp")
     os.remove(doc_location)
+    return "Result_{num:0>4}.pdf".format(num=str(ID))
