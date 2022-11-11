@@ -5,10 +5,7 @@ import re
 
 def title_generation(data):
     print("[!] Server logs: Title generation has started")
-    try:
-        text = data["article"]
-    except KeyError as k:
-        text = data["text"]
+    text = data["content"]
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = T5ForConditionalGeneration.from_pretrained(
         "Michau/t5-base-en-generate-headline"

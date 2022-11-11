@@ -8,10 +8,7 @@ from src.components.title_generation import title_generation
 
 def summarize(data):
     print("[!] Server logs: Summarizer Engine has started")
-    try:
-        text = data["article"]
-    except KeyError as k:
-        text = data["text"]
+    text = data["content"]
     to_tokanize = text[:1024]
     summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
     summarized = summarizer(to_tokanize)
