@@ -94,5 +94,3 @@ def user_redirect():
         print(e)
         return "callback!!!!!!!!!!!!!!!!!"
 
-
-

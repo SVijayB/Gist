@@ -4,7 +4,6 @@ import PyPDF2
 from docx2pdf import convert
 from pytesseract import pytesseract
 import os
-import re
 
 # Component used for data extraction from text.
 def extract(type, link):
@@ -40,7 +39,8 @@ def extract(type, link):
         convert(link, output_path="temp/output.pdf")
         tmp_type = "Document"
         result = extract(3, "temp/output.pdf")
+        os.remove("temp/output.pdf")
     else:
         return {"error": "Invalid type"}
 
-    return {"type": tmp_type, "link": link, "article": result}
+    return {"type": tmp_type, "link": link, "content": result}
