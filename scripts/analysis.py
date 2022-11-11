@@ -43,6 +43,8 @@ def analyse():
         curr_result["rouge-1"] = rouge_score[0]["rouge-1"]
         curr_result["rouge-2"] = rouge_score[0]["rouge-2"]
         curr_result["rouge-l"] = rouge_score[0]["rouge-l"]
+
+        print("[!] Server logs: Data collection completed for article", ID)
         ID += 1
         result.append(curr_result)
     return result

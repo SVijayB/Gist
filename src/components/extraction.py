@@ -42,5 +42,5 @@ def extract(type, link):
         os.remove("temp/output.pdf")
     else:
         return {"error": "Invalid type"}
-
+    result = " ".join(result.splitlines())
     return {"type": tmp_type, "link": link, "content": result}
