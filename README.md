@@ -5,7 +5,7 @@
     <br>Gist: Less is more | A text summarizer
 </p>
 
-----
+---
 
 [![GitHub pull-requests](https://img.shields.io/github/issues-pr/SVijayB/Gist.svg)](https://github.com/SVijayB/Gist/pulls)
 [![GitHub issues](https://img.shields.io/github/issues/SVijayB/Gist.svg)](https://github.com/SVijayB/Gist/issues)
@@ -77,4 +77,4 @@ Also, thanks for contributing to Open-source!
 
 Gist is under The MIT License. Read the [LICENSE](https://github.com/SVijayB/Gist/blob/master/LICENSE) file for more information.
 
-----
+---
