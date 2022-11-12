@@ -1,4 +1,4 @@
-import re
+import regex as re
 import json
 import requests
 from os import getenv
@@ -26,7 +26,7 @@ def summarize(data):
     tmp = tmp.replace(f"{chr(61623)}", "")
     tmp = tmp.replace("\x92", "")
     tmp = tmp.replace("\x0c", "")
-    regex_pattern = r"(?<='summary_text': ' )(.*)(?='})"
+    regex_pattern = "(?<='summary_text': '|\" )(.*)(?= .'|\"})"
     try:
         result = re.search(regex_pattern, tmp).group(0)
     except:
