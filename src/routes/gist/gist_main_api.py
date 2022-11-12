@@ -43,10 +43,9 @@ def gist():
         gist_data = requests.get(
             f"http://127.0.0.1:5000/api/summarize?type=1&link={article_url}"
         ).json()
-        print(gist_data)
         article = {
-            "title": article["title"],
-            "summary": "gist_summary",
+            "title": gist_data["title"],
+            "summary": gist_data["summary"],
             "url": article["link"],
             "dateAndTime": article["pubDate"],
             "image": img_url,
