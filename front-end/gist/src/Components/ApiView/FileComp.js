@@ -18,7 +18,7 @@ function FileComp(props){
                     <div className="progress_bar">
                     </div>
                     <div className="">
-                        <a href={props.bloburl} target="_blank" rel="noreferrer">click here</a> 
+                        click here
                     </div>
                     
                 </div>
@@ -30,3 +30,12 @@ function FileComp(props){
 
 export default FileComp;
 
+/*<div className="file_pic">
+               <img src="" alt="file"/>
+           </div>
+           <div>
+            <div className="file_meta">
+                <div>File Name</div>
+                <div>Complated</div>
+            </div>
+           </div> */
