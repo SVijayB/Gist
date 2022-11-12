@@ -1,12 +1,20 @@
 # Main API for the Gist platform.
+import xmltodict
+from bs4 import BeautifulSoup
 from flask import Flask, jsonify, Blueprint
 import json
 import requests
-import os
 from dotenv import load_dotenv
 from os import getenv
+from pymongo import MongoClient
 
+load_dotenv()
 gist_bp = Blueprint("Gist", __name__, url_prefix="/gist")
+CONNECTION_STRING = getenv("MONGO_CONNECTION_STRING")
+db = MongoClient(CONNECTION_STRING)
+dbname = db["articles"]
+collection_name = dbname["items"]
+load_dotenv
 
 
 @gist_bp.route("/", methods=["GET"])
@@ -15,20 +23,34 @@ def gist():
     # Component to send the article to the summarizer using summarize_api (Just call local API using requests)
     # Create MongoDB account and save articles. Format mentioned as below.
     # [{"title": "title of article", "summary": "summary generated", "url": "url of news article", "date_and_time": "value"}, {repeat}]
-    # .format is not working check once
-    load_dotenv()
-    Guardian_API_Key = getenv("Guardian_API_Key")
-    url = f"https://content.guardianapis.com/search?api-key={Guardian_API_Key}"
+
+    url = "https://timesofindia.indiatimes.com/rssfeedstopstories.cms"
     response = requests.get(url)
-    data = response.json()["response"]
+    my_dict = xmltodict.parse(response.content)
+    data = my_dict["rss"]["channel"]["item"]
     result = []
-    for article in data["results"]:
+    for article in data:
+        article_url = article["link"]
+        reqs = requests.get(article_url)
+        soup = BeautifulSoup(reqs.text, "html.parser")
+        imgs = soup.find_all("img")
+        for i in imgs:
+            img_url = i.get("data-src")
+            if img_url == None:
+                pass
+            else:
+                break
+        gist_data = requests.get(
+            f"http://127.0.0.1:5000/api/summarize?type=1&link={article_url}"
+        ).json()
+        print(gist_data)
         article = {
-            "title": article["webTitle"],
-            "summary": "will generate",
-            "url": article["webUrl"],
-            "date_and_time": article["webPublicationDate"],
+            "title": article["title"],
+            "summary": "gist_summary",
+            "url": article["link"],
+            "dateAndTime": article["pubDate"],
+            "image": img_url,
         }
         result.append(article)
-
-    return jsonify(result)
+    collection_name.insert_many(result)
+    return jsonify({"status": "success", "message": "Gist data added to database"})
