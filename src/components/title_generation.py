@@ -18,9 +18,8 @@ def title_generation(data):
         result = json.loads(response.content.decode("utf-8"))
         result = result[0]["generated_text"]
         print("[!] Server logs: Title generation completed")
-
-        data["title"] = result
-    except Exception as e:
-        print(e)
-        data["title"] = "Title Generation Failed"
+    except:
+        data["title"] = "Title Generation Failed! Please try again later."
+        print("[!] Server logs: Title generation failed")
+    data["title"] = result
     return data
