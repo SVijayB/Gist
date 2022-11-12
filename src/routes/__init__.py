@@ -2,9 +2,6 @@ from flask import Blueprint
 from src.routes.extraction import extraction_api
 from src.routes.summarizer import summarize_api
 from src.routes.categorizer import categorizer_api
-from src.routes.gmail import gmail_api
-
-# from src.routes.gmail import gmail_api
 from src.routes.gist import gist_main_api
 
 api_blueprint = Blueprint("API", __name__, url_prefix="/api/")
