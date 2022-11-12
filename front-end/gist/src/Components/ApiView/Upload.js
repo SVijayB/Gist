@@ -20,8 +20,10 @@ function Upload(props){
                           <div className='Upload_History'>
                                 <div><h4>Uploaded File</h4></div>
                                 <div className='file_scroll'>
-                                 {props.data.map((data,index)=>(
-                                    <FileComp  key={index} filename={data.name}/>
+                                 {props.data.reverse().map((data,index)=>(
+        
+                                    <FileComp  key={index+100} filename={data.name} bloburl={props.bob[index]}/>
+                                    
                                 ))}
                                 </div>
                           </div>

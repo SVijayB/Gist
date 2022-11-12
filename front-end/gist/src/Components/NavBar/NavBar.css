@@ -144,3 +144,15 @@ color: white;
 .product_list >li{
     margin: 5px 0 5px 0;
 }
+
+.Gmail_container span{
+color: black !important;
+}
+.Gmail_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+}

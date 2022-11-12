@@ -1,0 +1,75 @@
+
+.modalcontent >  *{
+    color: black !important;
+}
+
+.overlayContainer{
+    background-color: rgb(0,0,0,0.2);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+}
+
+.modalContainer{
+
+    max-width: 600px;
+    width: 100%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    border-radius: 10px;
+    background-color: white;
+    z-index: 9999;
+    box-shadow: 30px -10px 8px 8px rgb(0,0,0,0.6);
+
+}
+
+.modalContainer .gmail_pic{
+border-radius: 10px;
+width: 250px;
+object-fit: cover;
+}
+
+.contentright{
+    width: 100%;
+
+}
+.modalcontent{
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 3rem;
+ 
+}
+.modalcontent h2{
+white-space: nowrap;
+font-size: 1.5rem;
+font-weight: bolder;
+}
+
+.modalcontent .modalclose{
+    width: 50%;
+    align-self: center;
+    font-weight: bolder;
+}
+
+.gmail_pic {
+    animation: rotation 20s;
+}
+.linear {
+    animation-timing-function: linear;
+}
+.infinite {
+    animation-iteration-count: infinite;
+}
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}

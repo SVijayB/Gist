@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import axios from "axios";
 import './ApiView.css'
 import FileIcon from '../../Images/file_upload_icon.svg'
@@ -9,13 +9,12 @@ const BaseUrl="http://127.0.0.1:5000/api/summarize?"
 
 
 function ApiView(props){
-   const [post, setPost] = useState(null); //returns a array
    const [Url,SetUrl]=useState('');
    const [File,SetFile]=useState('');
    const [Text,setText]=useState('UPLOAD OR ENTER URL')
    const [Opt,SetOpt]=useState("1")
    const [UserHist,SetUserHist]=useState([])
-
+   const [bloburl,setbloburl] = useState([])
 
 
 
@@ -32,39 +31,65 @@ function ApiView(props){
   const OnSubmitHandler=(event)=>{
     event.preventDefault();
     if(Opt==='1'){
-       const FileObj={
-      name:'WEB',
-     }
-     SetUserHist([FileObj,...UserHist])
-    }else{
-     //file
+      const FileObj={
+        name:'WEB',
+      }
+       PostArticle()
+      SetUserHist([FileObj,...UserHist])
+
+    }
+    else{
      const FileObj={
       name:File.name,
       size:File.size,
       type:File.type
      }
+     FileSubmitHandler()
      SetUserHist([FileObj,...UserHist])
      
     }
+    console.log(UserHist)
   }
 
+  function FileSubmitHandler(){
+     const formData = new FormData();
+     formData.append("FILE",File);
+     const config = {
+      headers: {
+        enctype: "multipart/form-data",
+      },
+      responseType: 'blob'
+    };
+    axios.post(`http://127.0.0.1:5000/api/summarize/file?report=1`,formData,config,).then((res)=>{
+       let blob = new Blob([res.data], {type: "application/pdf"});
+       let fileURL = URL.createObjectURL(blob);
+       window.open(fileURL,'_blank');
+       setbloburl([fileURL,...bloburl])
+    }).catch(e=>{
+      console.log(e);
+    });
+   }
+
+  const PostArticle=()=>{
+     axios.get(`${BaseUrl}type=1&link=${Url}&report=1`,{
+      responseType: 'blob'
+    }).then((res)=>{
+       let blob = new Blob([res.data], {type: "application/pdf"});
+       let fileURL = URL.createObjectURL(blob);
+       window.open(fileURL,'_blank');
+       setbloburl([fileURL,...bloburl])
+    });
+
+
+  }
+ 
   const OnChangeHandler=(event)=>{
-     if(event.target.id==='Url')
+     if(event.target.id==='Url'){
       SetUrl(event.target.value);
+     }
      else
       SetFile(event.target.files[0])
-   
   }
-  
-  useEffect(()=>{
-    console.log(UserHist)
-  },[UserHist])
- /* useEffect(()=>{
-    console.log(Url)
-  },[Url])
-    useEffect(()=>{
-    console.log("file"+File)
-  },[File]) */
 
   return(
   
@@ -82,7 +107,7 @@ function ApiView(props){
             </div>
             <div className='upload_playload'>
 
-               <Upload  option={Opt} formsubmission={OnSubmitHandler} url={OnChangeHandler} text={Text} data={UserHist}/> 
+               <Upload  option={Opt} formsubmission={OnSubmitHandler} url={OnChangeHandler} text={Text} data={UserHist} bob={bloburl}/> 
                
             </div>
 
