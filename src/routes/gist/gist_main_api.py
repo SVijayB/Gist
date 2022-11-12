@@ -14,7 +14,6 @@ CONNECTION_STRING = getenv("MONGO_CONNECTION_STRING")
 db = MongoClient(CONNECTION_STRING)
 dbname = db["articles"]
 collection_name = dbname["items"]
-load_dotenv
 
 
 @gist_bp.route("/", methods=["GET"])
@@ -52,4 +51,5 @@ def gist():
         }
         result.append(article)
     collection_name.insert_many(result)
+    print("[!] Server log: Database updated successfully!")
     return jsonify({"status": "success", "message": "Gist data added to database"})
