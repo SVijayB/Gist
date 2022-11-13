@@ -3,29 +3,30 @@ import './card.css'
 
 
 function Card(props){
-
+  let title=""
+   title=props.t
+  let dt=props.dt.split("T")
+  let date=dt[0].split("").reverse().join("")
+  let time=dt[1].substring(0,5)
+  
 return(
 
     <>
-    <div className="card_container">
-       <div className='card_header'>
-        <img alt='img' src='https://wme-gep-drupal-hbo-prod.s3.amazonaws.com/2022-09/house-of-the-dragon-sn01-v2-ka-1920.jpg?w=640'/>
+    <div className="card_container"  onClick={props.fn}  data-position={props.pos}>
+       <div className='card_header' data-position={props.pos}>
+        <img alt='img' src={props.img} data-position={props.pos}/>
        </div>
-       <div className='card_content'>
-            <div className='card_meta_data'>
-                 2 MONDAYS AT 10 PM
+       <div className='card_content' data-position={props.pos}>
+            <div className='card_meta_data' data-position={props.pos}>
+               <div data-position={props.pos}>{date.substring(0,6)+date.substring(6).split("").reverse().join("")}</div>
+              <div data-position={props.pos}>{time}</div>
             </div>
-            <div className='card_title'>
-                TITLE 
+            <div className='card_title' data-position={props.pos}>
+              <b data-position={props.pos}>{title}</b> 
             </div>
-            <div className='card_data'>
-              <p className='card_data_p'>
-                Set 40 years in the future when traveling the solar system is big business,
-                 this comedy series follows life on board Avenue 5, a mash-up of a cruise liner 
-                 and an interplanetary rocket ship.
-                 Set 40 years in the future when traveling the solar system is big business,
-                 this comedy series follows life on board Avenue 5, a mash-up of a cruise liner 
-                 and an interplanetary rocket ship.
+            <div className='card_data' data-position={props.pos}>
+              <p className='card_data_p' data-position={props.pos}>
+                {props.summary}
               </p>
             </div>
        </div>

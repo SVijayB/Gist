@@ -1,0 +1,85 @@
+.Gistmodalcontent>* {
+    color: black !important;
+    padding: 10px;
+}
+.gplaceholder{
+    width: 100%;
+    height:  calc(100vh - 78px);
+    background-color: #16181d;
+}
+.GistoverlayContainer {
+    background-color: #16181d;
+    position: fixed;
+    width: 100%;
+    height: calc(100vh - 78px);
+
+}
+.GistmodalContainer {
+
+    width: 70%;
+    height: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    border-radius: px;
+    background-color: #f8f8f8;
+    z-index: 9999;
+    box-shadow: 30px -10px 8px 8px rgb(0, 0, 0, 0.6);
+
+}
+.new_pic{
+    width: 400px;
+    height: 400px;
+    object-fit: fill;
+}
+
+.btnmodal{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+.Gistcontentright{
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    overflow: auto;
+}
+
+.Gistmodalcontent{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.Gistmodalclose{
+    width: 150px;
+    color: black;
+    
+}
+
+.new_summary,.title_news{
+border-bottom: 2px solid hsla(0, 0%, 76.9%, .20)
+}
+.date{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.Time {
+    display: flex;
+    flex-direction: row;
+}
+.date h4,.Time h4{
+   color: #16181d;
+   padding: 5px;
+   border-radius: 20px;
+   background-color: rgb(5 227 243 / 14%);
+   margin:0px 4px;
+}
+.link{
+    text-decoration: none;
+}
+
