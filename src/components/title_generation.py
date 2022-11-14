@@ -23,3 +23,4 @@ def title_generation(data):
         print("[!] Server logs: Title generation failed")
     data["title"] = result
     return data
+
