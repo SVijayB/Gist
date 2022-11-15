@@ -1,6 +1,8 @@
 import UploadIcon from '../../Images/upload.png'
 import FileComp from './FileComp';
 import NewsIcon from "../../Images/news.png"
+//import {v4 as uuid} from 'uuid'
+
 
 function Upload(props){
     
@@ -20,9 +22,10 @@ function Upload(props){
                           <div className='Upload_History'>
                                 <div><h4>Uploaded File</h4></div>
                                 <div className='file_scroll'>
-                                 {props.data.reverse().map((data,index)=>(
+                                 {props.data.sort((a,b)=> b.id-a.id).map((data,index)=>(
         
-                                    <FileComp  key={index+100} filename={data.name} bloburl={props.bob[index]}/>
+                                    <FileComp Up={props.Up}   key={data.id}  filename={data.name} Msg={data.Msg}
+                                     bloburl={data.bloburl} UploadProg={data.UploadProg}/>
                                     
                                 ))}
                                 </div>

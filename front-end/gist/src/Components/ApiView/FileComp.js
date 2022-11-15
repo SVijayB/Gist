@@ -12,13 +12,14 @@ function FileComp(props){
                 </div>
                 <div className="right">
                     <div className="file_flex">
-                            <div>{props.filename}</div>
-                            <div>Completed</div>
+                            <div className='file_name'>{props.filename}</div>
+                            <div >{props.Msg}</div>
                     </div>
                     <div className="progress_bar">
+                        <div className="progress_div"style={{width: props.UploadProg+"%"}}></div>
                     </div>
-                    <div className="">
-                        <a href={props.bloburl} target="_blank" rel="noreferrer">click here</a> 
+                    <div className="linker">
+                        <a className='rouder' href={props.bloburl} target="_blank" rel="noreferrer">click here</a> 
                     </div>
                     
                 </div>
