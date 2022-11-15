@@ -12,14 +12,14 @@ function GistModal(props){
         <div className='gplaceholder'>
           <div className="GistoverlayContainer">
               <div className="GistmodalContainer">
-                <img src={props.img==null?Icon:props.img} alt="New Pic" className="new_pic" />
+                <div className='flex_img'><img src={props.img==null?Icon:props.img} alt="New Pic" className="new_pic" /></div>
                 <div className="Gistcontentright">
                     <div className='Gistmodalcontent'>
                       <div className='date'><h4>{date.substring(0,6)+date.substring(6).split("").reverse().join("")}</h4></div>
                        <h2 className='title_news'>{props.title}</h2>
                        <div className='Time'>
-                        <h4 >TIME : {time}</h4>
-                        <div><a className='link' href={props.more} target="_blank"  rel="noreferrer"><h4>SOURCE : CLICK HERE</h4></a></div>
+                        <h6 >TIME : {time}</h6>
+                        <div><a className='link' href={props.more} target="_blank"  rel="noreferrer"><h6>SOURCE : CLICK HERE</h6></a></div>
                        </div>
                        <div className='new_summary'>{props.summary}</div>
                       <div className='btnmodal'><button className='Gistmodalclose' onClick={props.closebtn} >CLOSE</button></div> 

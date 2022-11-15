@@ -10,11 +10,14 @@ function CardGrid(props){
    const [modaldata,setmodaldata] = useState("")
    const [openModal,setModal] = useState(false)
    const [cards,setcards] = useState([])
+
    let page =0;
 
     const app =()=>{
       axios.get(`${BaseUrl}?page=${page}`).then((res)=>{
-         if(res.data.length>0){
+         
+         if(parseInt(res.data.length)>0){
+            
          setcards((prevstate)=>{
             const array =[...prevstate]
             for(let i=0;i<res.data.length;i++){
@@ -28,6 +31,7 @@ function CardGrid(props){
     }
 
     const ModalState =(event)=>{
+        window.removeEventListener('scroll',handleScroll)
         setModal(!openModal)
         let index = event.target.getAttribute("data-position")
         let data = cards[index];
@@ -36,7 +40,7 @@ function CardGrid(props){
 
      
     useEffect(()=>{
-      window.addEventListener('scroll',handleScroll,true)
+      window.addEventListener('scroll',handleScroll)
       app()
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
    
@@ -62,6 +66,7 @@ return(<>
    <div className="grid">
  { !openModal?
          cards.map((data,index)=>(
+            
              <Card  key={index} dt={data.dateAndTime} img={data.image}
              summary={data.summary} t={data.title} more={data.url}  fn={ModalState} pos={index}/>
          ))

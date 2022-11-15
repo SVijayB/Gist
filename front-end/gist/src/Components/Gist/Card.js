@@ -4,6 +4,7 @@ import './card.css'
 
 function Card(props){
   let title=""
+   if(typeof(props.t)!='object')
    title=props.t
   let dt=props.dt.split("T")
   let date=dt[0].split("").reverse().join("")
