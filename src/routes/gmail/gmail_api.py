@@ -12,7 +12,7 @@ from .serialzer import HeaderParser
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
-gmail_bp = Blueprint("gmail", __name__, url_prefix="/gist")
+gmail_bp = Blueprint("gmail", __name__, url_prefix="/gmail")
 SCOPES = ["https://www.googleapis.com/auth/userinfo.email","openid","https://www.googleapis.com/auth/gmail.readonly","https://www.googleapis.com/auth/userinfo.profile"]
 
 CURR_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -52,9 +52,6 @@ def user_redirect():
     flow.fetch_token(code=code)
     credentials = flow.credentials
     print(credentials)
-    with open('token.json', 'w') as token:
-        token.write(credentials.to_json())
-    print(credentials.to_json())
     service = build('gmail', 'v1', credentials=credentials)
     response = service.users().messages().list(maxResults=1, userId='me').execute()
     try:
