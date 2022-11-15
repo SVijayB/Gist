@@ -40,7 +40,7 @@ function Gmail(props){
   }
   
   const post_token = (data) =>{
-      axios.post(`http://127.0.0.1:5000/api/gist/callback`,data).then((res)=>{
+      axios.post(`http://127.0.0.1:5000/api/gmail/callback`,data).then((res)=>{
         console.log(res.data)
           setmodal(true);
           setlogin(true);
