@@ -15,7 +15,7 @@ return(
     <>
     <div className="card_container"  onClick={props.fn}  data-position={props.pos}>
        <div className='card_header' data-position={props.pos}>
-        <img alt='img' src={props.img} data-position={props.pos}/>
+        <img alt='img' loading="lazy" src={props.img} data-position={props.pos}/>
        </div>
        <div className='card_content' data-position={props.pos}>
             <div className='card_meta_data' data-position={props.pos}>
