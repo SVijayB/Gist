@@ -1,8 +1,5 @@
-import xmltodict
-from bs4 import BeautifulSoup
-from flask import Flask, jsonify, Blueprint, request
+from flask import Blueprint, request
 import json
-import requests
 from dotenv import load_dotenv
 from os import getenv
 from pymongo import MongoClient
