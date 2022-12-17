@@ -4,7 +4,7 @@ import React, {  useState,useEffect,useRef,useCallback} from 'react';
 import axios from "axios";
 import Footer from '../Footer/Footer'
 import GridModal from '../Modal/GistModal'
-const BaseUrl="http://127.0.0.1:5000/api/gist/app"
+const BaseUrl="http://127.0.0.1:5000/api/gist/data"
 
 function CardGrid(props){
 
@@ -20,16 +20,16 @@ function CardGrid(props){
       observer.current = new IntersectionObserver(entries =>{
             if(entries[0].isIntersecting && HasMore){
                console.log("api call")
-               setpage((prev)=> prev+1)
                app(page)
+               setpage((prev)=> prev+1)
+               
             }
       })
       if(node) observer.current.observe(node)
-   }) 
+   },[cards,HasMore]) 
 
     const app =(PageNo)=>{
       axios.get(`${BaseUrl}?page=${PageNo}`).then((res)=>{
-         
          if(res.data.length === 0)
            SetHasMore(false)
 
