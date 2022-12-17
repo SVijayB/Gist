@@ -154,5 +154,17 @@ color: black !important;
     align-items: center;
     height: 100%;
     width: 100%;
-
+    flex-direction: column;
+}
+.info_gmail_text{
+    padding: 20px;
+    margin: 20px;
+    font-size: 2rem;
+}
+.arrowIcon{
+    background-image: url('../../Images/inky-arrow.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 180px;
+    height: 300px;
 }

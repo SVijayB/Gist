@@ -1,7 +1,8 @@
 import Card from './Card';
 import './card.css'
-import React, {  useState,useEffect } from 'react';
+import React, {  useState,useEffect,useRef,useCallback} from 'react';
 import axios from "axios";
+import Footer from '../Footer/Footer'
 import GridModal from '../Modal/GistModal'
 const BaseUrl="http://127.0.0.1:5000/api/gist/app"
 
@@ -9,13 +10,29 @@ function CardGrid(props){
 
    const [modaldata,setmodaldata] = useState("")
    const [openModal,setModal] = useState(false)
+   const [TragetId,SetTragetId] = useState(0)
    const [cards,setcards] = useState([])
+   const [page,setpage] = useState(1)
+   const [HasMore,SetHasMore] = useState(true)
+   const observer = useRef()
+   const LastNewsCard = useCallback(node => {
+      if(observer.current) observer.current.disconnect()
+      observer.current = new IntersectionObserver(entries =>{
+            if(entries[0].isIntersecting && HasMore){
+               console.log("api call")
+               setpage((prev)=> prev+1)
+               app(page)
+            }
+      })
+      if(node) observer.current.observe(node)
+   }) 
 
-   let page =0;
-
-    const app =()=>{
-      axios.get(`${BaseUrl}?page=${page}`).then((res)=>{
+    const app =(PageNo)=>{
+      axios.get(`${BaseUrl}?page=${PageNo}`).then((res)=>{
          
+         if(res.data.length === 0)
+           SetHasMore(false)
+
          if(parseInt(res.data.length)>0){
             
          setcards((prevstate)=>{
@@ -25,39 +42,31 @@ function CardGrid(props){
             }
          return array
          })
-           page=page+1
          }
     });
     }
 
     const ModalState =(event)=>{
-        window.removeEventListener('scroll',handleScroll)
         setModal(!openModal)
         let index = event.target.getAttribute("data-position")
         let data = cards[index];
+        SetTragetId(index)
         setmodaldata(data)
     }
-
+    
+    useEffect(() => {
+    const element = document.getElementById(TragetId)
+    if (element && !openModal){
+        element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
+    }
+    }, [TragetId,openModal])
      
     useEffect(()=>{
-      window.addEventListener('scroll',handleScroll)
-      app()
+      app(0)
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
    
-    const handleScroll=(event)=>{
-     
-       if(event.target.localName ===undefined ){
-            const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-            
-            if (scrollTop + clientHeight >=scrollHeight ) {
-                app()
-            }
-       }
-   
-    }
-
    const closeModal =()=>{
-    setModal(!openModal)
+      setModal(!openModal)
   }
 
 
@@ -65,17 +74,22 @@ function CardGrid(props){
 return(<>
    <div className="grid">
  { !openModal?
-         cards.map((data,index)=>(
-            
-             <Card  key={index} dt={data.dateAndTime} img={data.image}
-             summary={data.summary} t={data.title} more={data.url}  fn={ModalState} pos={index}/>
-         ))
+         cards.map((data,index)=>{
+              if (index+1 === cards.length)
+               return  <Card  key={index} dt={data.dateAndTime} img={data.image} Innerref={LastNewsCard}
+               summary={data.summary} t={data.title} more={data.url}  fn={ModalState} pos={index}/>
+               else
+               return  <Card  key={index} dt={data.dateAndTime} img={data.image} 
+               summary={data.summary} t={data.title} more={data.url}  fn={ModalState} pos={index}/>
+
+          })
          :null
+  
       }
    </div>
+   {!openModal?<Footer/>:null}
    <GridModal open={openModal}  closebtn={closeModal} img={modaldata.image}
-    title={modaldata.title} summary={modaldata.summary} dt={modaldata.dateAndTime} more={modaldata.url}
-    
+    title={modaldata.title} summary={modaldata.summary} dt={modaldata.dateAndTime} more={modaldata.url}  
     />
    </>
 );

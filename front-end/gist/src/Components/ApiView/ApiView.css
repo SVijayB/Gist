@@ -144,6 +144,14 @@
 }
 .Upload_History{
     overflow: auto;
+    scrollbar-width: thin;
+}
+.Upload_History::-webkit-scrollbar {
+    width: 4px;
+}
+.Upload_History::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    border: 4px solid #000;
 }
 
 .api_form{
@@ -189,17 +197,17 @@ overflow: hidden;
 /*========================================================================================================================*/
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
-* {
+body{
     scrollbar-width: thin;
     scrollbar-color: #444950;
 }
 
 /* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
+body::-webkit-scrollbar {
     width: 8px;
 }
 
-*::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
     background-color: #444950;
     border-radius: 8px;
     border: 4px solid rgba(52, 58, 70, .8);

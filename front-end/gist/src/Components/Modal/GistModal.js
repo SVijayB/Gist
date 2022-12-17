@@ -5,7 +5,7 @@ import Icon from '../../Images/power.svg'
 function GistModal(props){
     if (!props.open) return null;
   let dt=props.dt.split("T")
-  let date=dt[0].split("").reverse().join("")
+  let date=dt[0].slice(-2)+'-'+dt[0].slice(-5,-3)+'-'+dt[0].slice(-10,-6)
   let time=dt[1].substring(0,5)
     return(
         <>

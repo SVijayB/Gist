@@ -1,0 +1,68 @@
+.AboutProjectSection{
+    background-color: #5a38e5;
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+    flex-direction: column;
+    align-items: center;
+
+}
+.center-text{
+    text-align: center;
+}
+.AbtText{
+    width: 80%;
+    padding: 10px;
+}
+.size1{
+    font-weight: bolder;
+    font-size: 2rem;
+}
+.size2 {
+    font-weight:lighter;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+
+
+
+.infoseaction{
+    background-color: #FFB28D;
+    position: relative;
+    width: 100%;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.User_Imgs{
+    width: 360px;
+    height: 280px;
+    margin: 10px;
+    border: 4px solid #16181d;;
+}
+
+.Team{
+    text-align: center;
+    font-weight: bolder;
+    font-size: 2rem;
+}
+.flex_list{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+.DImg{
+    width: 100%;
+    height: 100%;
+}
+
+.DImg img{
+    width: 100%;
+    height: 100%;
+}

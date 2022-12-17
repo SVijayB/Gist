@@ -5,7 +5,8 @@ import { gapi } from 'gapi-script';
 import axios from "axios";
 import Navbar from '../Components/NavBar/NavBar'
 import Modal from "../Components/Modal/Modal";
-
+import Footer from '../Components/Footer/Footer'
+import { Link  as LinkS} from "react-scroll";
 
 function Gmail(props){
   
@@ -61,6 +62,9 @@ return (
         <Modal  open={modal} closebtn={closeModal} userlogin={login}/>
         {!modal?
         <div className="Gmail_container">
+          <div className="info_gmail_text">
+            Login into your Gmail Account
+          </div>
             <GoogleLogin 
                       clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                       buttonText="Login"
@@ -71,11 +75,17 @@ return (
                       accessType='offline'
                       disabled={btndisabled}
               />
+          <div className="info_gmail_text">
+            Read Privacy Policy
+          </div>
+            <LinkS to='FooterH'> <div className="arrowIcon" ></div></LinkS>
+          
         </div>:null
         }
        
       
      </div>
+     {!modal?<Footer/>:null}
    
     </>
 
