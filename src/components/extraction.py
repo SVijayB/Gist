@@ -1,6 +1,6 @@
 from newspaper import Article
 from PIL import Image
-import PyPDF2
+import fitz
 from docx2pdf import convert
 from pytesseract import pytesseract
 import os
@@ -27,13 +27,15 @@ def extract(type, link):
         tmp_type = "Image"
     elif type == 3:  # PDF file
         # pdfFileObj = open("example.pdf", "rb")
-        pdfFileObj = open(link, "rb")
-        pdfReader = PyPDF2.PdfFileReader(pdfFileObj, strict=False)
+        fileObj = fitz.open(link)
         result = ""
-        for i in range(pdfReader.numPages):
-            pageObj = pdfReader.getPage(i)
-            result = result + pageObj.extractText()
-        pdfFileObj.close()
+        for page in fileObj:
+            result += page.get_text() + chr(12)
+        tmp_type = "PDF"
+        result = result.encode("ascii", "ignore")
+        result = result.decode()
+        result = result.replace("\x92", "")
+        result = result.replace("\x0c", "")
         tmp_type = "PDF"
     elif type == 4:  # Document file
         convert(link, output_path="temp/output.pdf")

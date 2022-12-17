@@ -1,23 +1,20 @@
-import xmltodict
-from bs4 import BeautifulSoup
-from flask import Flask, jsonify, Blueprint, request
+from flask import Blueprint, request
 import json
-import requests
 from dotenv import load_dotenv
 from os import getenv
 from pymongo import MongoClient
 from bson import json_util
 
 load_dotenv()
-gist_app_bp = Blueprint("GistApp", __name__, url_prefix="/gist/app")
+gist_data_bp = Blueprint("gistData", __name__, url_prefix="/gist/data")
 CONNECTION_STRING = getenv("MONGO_CONNECTION_STRING")
 db = MongoClient(CONNECTION_STRING)
 dbname = db["articles"]
 collection_name = dbname["items"]
 
 
-@gist_app_bp.route("/", methods=["GET"])
-def gistApp():
+@gist_data_bp.route("/", methods=["GET"])
+def gistData():
     # Read Documents from Mongo Collection
     # Read Page Number
     page = request.args.get("page")
