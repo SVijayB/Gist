@@ -5,7 +5,7 @@ function InfoSection(props){
  
    return (
     <>
-    <div className="AboutProjectSection">
+    <div className="AboutProjectSection" id="AboutSection">
         <div className="AbtText size1 center-text">
            About Project
         </div>
@@ -23,7 +23,7 @@ function InfoSection(props){
 
      
     <div className="infoseaction">
-        <div className="Team">
+        <div className="Team" id="team">
               Meet Our Team
         </div>
         <div className="flex_list">

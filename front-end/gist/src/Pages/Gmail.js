@@ -61,7 +61,7 @@ return (
      <div className="About_container">
         <Modal  open={modal} closebtn={closeModal} userlogin={login}/>
         {!modal?
-        <div className="Gmail_container">
+        <div className="Gmail_container" id="Top">
           <div className="info_gmail_text">
             Login into your Gmail Account
           </div>

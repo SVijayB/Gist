@@ -1,7 +1,8 @@
 import "./NavBar.css";
 import { Link } from "react-router-dom";
 import Logo from "../../Images/logo_2_rmbg.png";
-
+import { Link as LinkS } from "react-scroll";
+import Arrow from '../../Images/inky-arrow.png'
 
 function MyNavBar() {
   return (
@@ -17,24 +18,52 @@ function MyNavBar() {
           </div>
 
           <div className="header_menu_list">
-            <ul className="soln">
-              <li>How It Works</li>
-              <li>Pricing</li>
-              <li className="product">
-                Products
-                 <ul className="product_list">
-                  <li>Gmail Summarizer</li>
-                  <li>API</li>
-                  <li>GIST</li>
-                 </ul>
-              </li>
-            </ul>
+            <div className="soln">
+                <LinkS to="products&s"
+                smooth={true}
+                duration={100}
+                spy={true}
+                exact="true"
+                offset={-100}>
+                PRODUCTS
+                </LinkS>
+                <LinkS to="AboutSection"    
+                smooth={true}
+                duration={100}
+                spy={true}
+                exact="true"
+                offset={-100}>
+                ABOUT
+                </LinkS>
+                <LinkS to="team"
+                smooth={true}
+                duration={100}
+                spy={true}
+                exact="true"
+                offset={-100}>
+                TEAM
+                </LinkS>
+            </div>
           </div>
         </div>
 
         <div className="user_actions">
-          <button  type="button" className="user_btn">Log In</button>
-          <button   type="button" className="user_btn active_btn" style={{color:"white",border: "2px solid #00B3B3"}}>Sign Up</button>
+          <LinkS  to="FooterH" className="user_btn"
+            smooth={true}
+            duration={100}
+            spy={true}
+            exact="true"
+            offset={-100}>
+              <img src={Arrow} alt="ArrowUp"/>  
+          </LinkS>
+          <LinkS  to="Top" className="user_btn" style={{background:"#fff"}}
+            smooth={true}
+            duration={100}
+            spy={true}
+            exact="true"
+            offset={-100}>
+             <img src={Arrow} alt="ArrowDown" id="DownArrow"/> 
+          </LinkS>
         </div>
 
         <div className="Mobile-icon">

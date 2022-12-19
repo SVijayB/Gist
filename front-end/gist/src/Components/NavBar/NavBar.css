@@ -25,6 +25,8 @@
     display: flex;
     justify-content: space-between;
     width: 70%;
+    position: relative;
+    height: 100%;
     align-items: center;
     
 }
@@ -52,98 +54,44 @@ display: flex;
 list-style: none;
 position: relative;
 }
-.header_menu_list .soln>li{
+.header_menu_list .soln>a{
     margin-left: 40px;
+    font-weight: bolder;
     position: relative;
+    cursor: pointer;
+    text-decoration: none;
+ 
 }
 .Mobile-icon{
     display: none;
 }
 .user_actions{
     display: flex;
+    height: 100%;
 }
 
-.active_btn{
-border: 2px solid;
-background-color: #00B3B3 !important;
-color: white;
-}
-.active_btn:hover{
-background-color:white !important;
-color: #00B3B3 !important;
-}
-
-.user_btn:hover{
-border: 2px solid #00B3B3;
-background-color: #00B3B3;
-color: white;
-}
 
 .user_btn{
-    padding: 8px 27px;
-    font-size: 13px;
-    line-height: 15px;
+    padding: 2px;
     min-width: 120px;
-    background-color: white;
-    color: #323232;
+    background-color: #FFAF88;
     border-radius: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+.user_btn img{
+    height: 100%;
+    z-index: 108;
 }
 
 .user_actions button:nth-child(2){
  margin-left: 15px;
 }
 
-.product::before{
-  content:url(../../Images/down.svg);
-  position: absolute;
-  top: 0;
-  right: -18px;
-  transition: 0.4s;
-}
-
-.product::after {
-
-    content: "";
-    width: 100%;
-    height: 5px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    transform: translateY(100%);
-}
-
-.product_list{
-    position: absolute;
-    z-index: 1;
-    width: max-content;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 0 15px rgb(0 0 0 / 35%);
-    display: none;
-    bottom: -10px;
-    transform: translateY(calc(100% - 5px));
-    transition: all 0.4s ease;
-    list-style-type: none;
-    background-color: #16181d;
-    align-items: flex-start;
-}
-
-.product:hover::before {
-    transform: rotate(-180deg) translateY(5px);
-}
-
-
-
-.product:hover .product_list{
-    display: block;
-}
-
-
-
-.product_list >li{
-    margin: 5px 0 5px 0;
-}
 
 .Gmail_container span{
 color: black !important;
@@ -167,4 +115,12 @@ color: black !important;
     background-repeat: no-repeat;
     width: 180px;
     height: 300px;
+}
+
+.header_menu_list{
+    display: flex;
+    align-items: center;
+}
+#DownArrow{
+    transform: rotate(180deg);
 }

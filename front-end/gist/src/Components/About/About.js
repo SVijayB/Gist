@@ -12,7 +12,7 @@ function About(){
 
     return(
      
-        <div className="About_container">
+        <div className="About_container" id="Top">
             <div className='abt_img rows'>
                 <img src={AboutImg} alt="Reading"/>
             </div>

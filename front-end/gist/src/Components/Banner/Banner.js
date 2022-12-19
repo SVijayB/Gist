@@ -28,7 +28,7 @@ function Banner(props){
 
     return(
         <>
-          <div className="Banner_Section">
+          <div className="Banner_Section" id="products&s">
             <div className='Team PandS'> Product and Service</div>
             <div className="Banner_Container">
                 <Item heading="Summarizer" about={about} clickHandler={RouteHandler.bind(this,"/api")} />
