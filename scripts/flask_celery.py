@@ -4,7 +4,9 @@ from celery.utils.log import get_task_logger
 from EmailSender import send_email
 
 logger = get_task_logger(__name__)
-celery = Celery(__name__, backend="redis://127.0.0.1:6379", broker="redis://127.0.0.1:6379")
+celery = Celery(
+    __name__, backend="redis://127.0.0.1:6379", broker="redis://127.0.0.1:6379"
+)
 
 
 @celery.task(name="summarizer")
