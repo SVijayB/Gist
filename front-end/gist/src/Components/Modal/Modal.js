@@ -16,7 +16,7 @@ function Modal(props){
                     <div className='modalcontent'>
                        <h2>{login_state}</h2>
                        {props.userlogin?<h2>GMAIL EXTRACTING .......</h2>:null}
-                       {props.userlogin?<p>We will get back to you when summary is read</p>:<p>Try Login using Google Again !</p>}
+                       {props.userlogin?<p>We will get back to you when summary is ready</p>:<p>Try Login using Google Again !</p>}
                        <button className='modalclose' onClick={props.closebtn} >CLOSE</button>
                     </div>
                 </div>
