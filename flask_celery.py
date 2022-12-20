@@ -16,7 +16,6 @@ def GmailSummarizer(gmails, email_address):
     send_email(responses, email_address)
     return True
 
-
 """
  run celery and also redis 
 # celery -A flask_celery.celery worker -l info --pool=solo 

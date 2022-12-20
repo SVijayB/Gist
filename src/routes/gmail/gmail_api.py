@@ -12,7 +12,6 @@ from flask_celery import GmailSummarizer
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
-
 gmail_bp = Blueprint("gmail", __name__, url_prefix="/gmail")
 SCOPES = ["https://www.googleapis.com/auth/userinfo.email", "openid", "https://www.googleapis.com/auth/gmail.readonly",
           "https://www.googleapis.com/auth/userinfo.profile"]
@@ -41,12 +40,16 @@ def get_mail():
 @gmail_bp.route("/callback", methods=["GET", "POST"])
 def user_redirect():
     code = request.get_json().get('code')
+    No_of_Emails = request.args.get("NoEmails")
+    if int(No_of_Emails) > 15:
+        No_of_Emails = 15
+    print(No_of_Emails)
     flow.fetch_token(code=code)
     credentials = flow.credentials
     print(credentials)
     service = build('gmail', 'v1', credentials=credentials)
     email_address = service.users().getProfile(userId='me').execute()['emailAddress']
-    response = service.users().messages().list(maxResults=10, userId='me').execute()
+    response = service.users().messages().list(maxResults=No_of_Emails, userId='me').execute()
     try:
         messages = response['messages']
         responses = []
@@ -77,7 +80,7 @@ def user_redirect():
 
         # print(responses)
         print(f"Sending Mail to {email_address}")
-        GmailSummarizer.delay(responses,email_address)
+        GmailSummarizer.delay(responses, email_address)
 
         return "Request successful", 200
     except Exception as e:
