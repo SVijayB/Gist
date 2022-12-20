@@ -108,6 +108,8 @@ color: black !important;
     padding: 20px;
     margin: 20px;
     font-size: 2rem;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 .arrowIcon{
     background-image: url('../../Images/inky-arrow.png');
@@ -123,4 +125,13 @@ color: black !important;
 }
 #DownArrow{
     transform: rotate(180deg);
+}
+.GmailDropdown{
+  padding: 2px;
+  margin: 4px;
+}
+#No_of_mail{
+    margin: 4px;
+    background-color: #16181d;
+    border-radius: 4px;
 }
