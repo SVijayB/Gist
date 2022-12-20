@@ -35,21 +35,23 @@ def summarize():
 
 @summarize_bp.route("/file", methods=["POST"])
 def file():
-    f = request.files.get('FILE')
+    f = request.files.get("FILE")
     report = request.args.get("report")
-    filename = hash_file(f.stream.read()) + "." + secure_filename(f.filename).split(".")[-1]
+    filename = (
+        hash_file(f.stream.read()) + "." + secure_filename(f.filename).split(".")[-1]
+    )
     f.stream.seek(0)
-    f.save(os.path.join('UserFiles', filename))
+    f.save(os.path.join("UserFiles", filename))
     file_extn = filename.split(".")[1]
-    if file_extn == 'pdf':
+    if file_extn == "pdf":
         data = extract_from_file(filename)
-    if file_extn == 'docx' or file_extn == "doc":
+    if file_extn == "docx" or file_extn == "doc":
         data = extract_from_docx(filename)
 
-    return pdf_generator({"content": data,"type":file_extn},report)
+    return pdf_generator({"content": data, "type": file_extn}, report)
 
 
-def pdf_generator(data,report):
+def pdf_generator(data, report):
 
     current_time = datetime.now()
     start_time = time.time()
