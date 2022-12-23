@@ -7,6 +7,7 @@ from flask import request, Blueprint, redirect, Response
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from .serialzer import HeaderParser
+from .gmailResult import GmailSummarizer
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
@@ -50,7 +51,9 @@ def user_redirect():
     credentials = flow.credentials
     service = build("gmail", "v1", credentials=credentials)
     email_address = service.users().getProfile(userId="me").execute()["emailAddress"]
-    response = service.users().messages().list(maxResults=No_of_Emails, userId="me").execute()
+    response = (
+        service.users().messages().list(maxResults=No_of_Emails, userId="me").execute()
+    )
     try:
         messages = response["messages"]
         responses = []
@@ -62,8 +65,8 @@ def user_redirect():
                 meta_data = HeaderParser(payload["headers"])
                 raw_data = ""
                 if (
-                        payload["mimeType"] == "text/html"
-                        or payload["mimeType"] == "text/plain"
+                    payload["mimeType"] == "text/html"
+                    or payload["mimeType"] == "text/plain"
                 ):
                     body = payload["body"]
                     data = body["data"]
@@ -84,7 +87,7 @@ def user_redirect():
 
         # print(responses)
         print(f"Sending Mail to {email_address}")
-        # GmailSummarizer.delay(responses, email_address)
+        GmailSummarizer(responses, email_address)
 
         return "Request successful", 200
     except Exception as e:
