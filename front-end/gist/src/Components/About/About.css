@@ -4,10 +4,56 @@
     box-sizing: border-box;
     color: white;
 }
+p{
+    margin-bottom: 0 !important;
+}
 
 .About_container{
-background-color: #16181d;
+display: flex;
+background-color: #16181D;
+justify-content: center;
 height: 100vh;
+min-height: 380px;
 width: 100%;
 padding-top: 80px;
+}
+
+.rows {
+    flex: 1;
+}
+
+.About_container .abt_img, .abt_text{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.abt_text{
+    flex-direction: column;
+}
+
+.abt_img img{
+   width: 80%;
+   height: 80%;
+}
+
+#abt_h1{
+    font-weight: bolder;   
+}
+#abt_heading{
+color: #04fab4;
+opacity: 80%;
+}
+#abt_btn{
+    margin: 20px;
+    position: relative;
+    left: 10px;
+}
+
+#abt_btn .abtuser_btn{
+    background: #481AFF;
+    padding: 8px 27px;
+    font-size: 13px;
+    line-height: 15px;
+    min-width: 120px;
+    border-radius: 52px;
 }

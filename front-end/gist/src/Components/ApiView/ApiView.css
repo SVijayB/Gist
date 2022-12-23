@@ -127,7 +127,13 @@
     margin: 10px;
 }
 .progress_bar{
-    border-bottom: dotted 2px black;
+    height: 2px;
+    background-color: #16181d;
+    margin: 0px 10px;
+}
+.progress_div{
+    height: 2px;
+    background-color: rgb(5 227 243 );
 }
 .file_scroll{
     position: relative;
@@ -138,6 +144,14 @@
 }
 .Upload_History{
     overflow: auto;
+    scrollbar-width: thin;
+}
+.Upload_History::-webkit-scrollbar {
+    width: 4px;
+}
+.Upload_History::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    border: 4px solid #000;
 }
 
 .api_form{
@@ -156,21 +170,44 @@
 #Url:focus{
     border: 2px solid #555;
 }
+.linker{
+    margin: 0px 10px;
+    margin-top: 5px;
+    
+}
+.rouder{
+background-color: rgb(5 227 243 / 14%);
+padding: 4px;
+padding-top: 2px;
+text-decoration: none;
+}
+.linker a{
+    border-radius: 5px;
+    
+}
+.file_name{
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
+overflow: hidden;
+ max-width: 240px;
+}
+
 
 /*========================================================================================================================*/
 /* ===== Scrollbar CSS ===== */
 /* Firefox */
-* {
+body{
     scrollbar-width: thin;
     scrollbar-color: #444950;
 }
 
 /* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
+body::-webkit-scrollbar {
     width: 8px;
 }
 
-*::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb {
     background-color: #444950;
     border-radius: 8px;
     border: 4px solid rgba(52, 58, 70, .8);

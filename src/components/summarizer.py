@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from src.components.title_generation import title_generation
 
 
-def summarize(data):
+def summarize(data, title=True):
     print("[!] Server logs: Summarizer Engine has started")
     text = data["content"]
     # to_tokanize = text[:1024]
@@ -35,5 +35,6 @@ def summarize(data):
     result = result.decode()
     data["summary"] = result
     print("[!] Server logs: Summarized article")
-    data = title_generation(data)
+    if title:
+        data = title_generation(data)
     return data

@@ -7,6 +7,8 @@ import os
 
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
+    print(os.getenv("SECRET_KEY"))
     app.url_map.strict_slashes = False
     api_cors_config = {
         "origins": [

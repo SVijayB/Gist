@@ -7,6 +7,7 @@ import requests
 from dotenv import load_dotenv
 from os import getenv
 from pymongo import MongoClient
+from lxml import etree
 
 load_dotenv()
 gist_bp = Blueprint("Gist", __name__, url_prefix="/gist")
@@ -32,13 +33,10 @@ def gist():
         article_url = article["link"]
         reqs = requests.get(article_url)
         soup = BeautifulSoup(reqs.text, "html.parser")
-        imgs = soup.find_all("img")
-        for i in imgs:
-            img_url = i.get("data-src")
-            if img_url == None:
-                pass
-            else:
-                break
+        img_s = soup.find_all("img")
+        og_img = soup.find("meta",attrs={"property":"og:image"})
+        img_url = og_img.get('content')
+        print(img_url)
         gist_data = requests.get(
             f"http://127.0.0.1:5000/api/summarize?type=1&link={article_url}"
         ).json()

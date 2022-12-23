@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import axios from "axios";
 import './ApiView.css'
 import FileIcon from '../../Images/file_upload_icon.svg'
@@ -14,9 +14,9 @@ function ApiView(props){
    const [Text,setText]=useState('UPLOAD OR ENTER URL')
    const [Opt,SetOpt]=useState("1")
    const [UserHist,SetUserHist]=useState([])
-   const [bloburl,setbloburl] = useState([])
 
-
+   const [UploadProg,SetUploadProg] = useState(0)
+   
 
 
   function SwitchHandler(event){
@@ -31,53 +31,107 @@ function ApiView(props){
   const OnSubmitHandler=(event)=>{
     event.preventDefault();
     if(Opt==='1'){
+      SetUserHist((prev)=>{
       const FileObj={
-        name:'WEB',
+        name:Url.replace(/(^\w+:|^)\/\//, '').split("/")[0],
+        id:prev.length,
+        bloburl:"#",
+        UploadProg:98,
+        Msg:"Processing"
       }
-       PostArticle()
-      SetUserHist([FileObj,...UserHist])
+      PostArticle(FileObj.id)
+      return [FileObj,...prev]
+      })
 
     }
     else{
      const FileObj={
       name:File.name,
       size:File.size,
-      type:File.type
+      type:File.type,
+      id:UserHist.length,
+      bloburl:"#",
+      UploadProg:0,
+      Msg:"Uploading"
      }
-     FileSubmitHandler()
+     FileSubmitHandler(FileObj.id)
      SetUserHist([FileObj,...UserHist])
      
     }
     console.log(UserHist)
   }
 
-  function FileSubmitHandler(){
+  function FileSubmitHandler(TargetIndex){
      const formData = new FormData();
      formData.append("FILE",File);
      const config = {
       headers: {
         enctype: "multipart/form-data",
       },
-      responseType: 'blob'
+      responseType: 'blob',
+      onUploadProgress: (progressEvent) => {
+				const totalLength =  (progressEvent.loaded /progressEvent.total)*100
+				console.log("onUploadProgress", totalLength);
+        SetUserHist((prev)=>{
+          let items =[...prev]
+           items.find((item,i)=>{
+            if(item.id===TargetIndex){
+               items[i].UploadProg=totalLength
+            }
+            return true;
+          })
+          return items
+       })
+			}
     };
     axios.post(`http://127.0.0.1:5000/api/summarize/file?report=1`,formData,config,).then((res)=>{
        let blob = new Blob([res.data], {type: "application/pdf"});
        let fileURL = URL.createObjectURL(blob);
        window.open(fileURL,'_blank');
-       setbloburl([fileURL,...bloburl])
+       //setbloburl([fileURL,...bloburl])
+       SetUserHist((prev)=>{
+          let items =[...prev]
+           items.find((item,i)=>{
+            if(item.id===TargetIndex){
+               items[i].bloburl=fileURL
+               items[i].Msg="Completed"
+            }
+            return true;
+          })
+          return items
+       })
     }).catch(e=>{
       console.log(e);
     });
    }
 
-  const PostArticle=()=>{
-     axios.get(`${BaseUrl}type=1&link=${Url}&report=1`,{
-      responseType: 'blob'
-    }).then((res)=>{
+  const PostArticle=(TargetIndex)=>{
+    
+    const config = {
+      responseType: 'blob',
+      onUploadProgress: (progressEvent) => {
+				const totalLength =  (progressEvent.loaded /progressEvent.total)*100
+				console.log("onUploadProgress", totalLength);
+        SetUploadProg(totalLength)
+			}
+    };
+
+     axios.get(`${BaseUrl}type=1&link=${Url}&report=1`,config).then((res)=>{
        let blob = new Blob([res.data], {type: "application/pdf"});
        let fileURL = URL.createObjectURL(blob);
        window.open(fileURL,'_blank');
-       setbloburl([fileURL,...bloburl])
+        SetUserHist((prev)=>{
+          let items =[...prev]
+           items.find((item,i)=>{
+            if(item.id===TargetIndex){
+               items[i].bloburl=fileURL
+               items[i].UploadProg=100
+               items[i].Msg="Completed"
+            }
+            return true;
+          })
+          return items
+       })
     });
 
 
@@ -90,6 +144,10 @@ function ApiView(props){
      else
       SetFile(event.target.files[0])
   }
+  
+  useEffect(()=>{
+    console.log(UserHist)
+  },[UserHist])
 
   return(
   
@@ -107,7 +165,8 @@ function ApiView(props){
             </div>
             <div className='upload_playload'>
 
-               <Upload  option={Opt} formsubmission={OnSubmitHandler} url={OnChangeHandler} text={Text} data={UserHist} bob={bloburl}/> 
+               <Upload  Up={UploadProg} option={Opt} formsubmission={OnSubmitHandler} 
+                url={OnChangeHandler} text={Text} data={UserHist} /> 
                
             </div>
 
@@ -124,44 +183,3 @@ function ApiView(props){
 
 
 export default ApiView;
-
-/*
-  function OnChangeHandler(event){
-        SetUrl(event.target.value);
-        console.log("VALUE : "+event.target.value);
-   }
-   
-   function OnChangeHandlerFile(event){
-        SetFile(event.target.files[0]);
-        console.log(event.target.files[0]);
-   }
-
-
-
-   function OnSubmitHandler(event){
-     axios.get(`${BaseUrl}type=1&link=${Url}`).then((res)=>{
-      setPost(res.data.article);
-      SetTitle(res.data.title);
-      Setsummary(res.data.summary);
-    });
-   }
-
-   function FileSubmitHandler(event){
-     event.preventDefault();
-     const formData = new FormData();
-     formData.append("FILE",File);
-     const config = {
-      headers: {
-        enctype: "multipart/form-data",
-      },
-    };
-    axios.post(`http://127.0.0.1:5000/api/summarize/file`,formData,config).then((res)=>{
-      console.log(res.data)
-      setPost(res.data.article);
-      SetTitle(res.data.title);
-      Setsummary(res.data.summary);
-    }).catch(e=>{
-      console.log(e);
-    });
-   }
-*/
