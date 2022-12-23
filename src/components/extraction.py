@@ -4,6 +4,8 @@ import fitz
 from docx2pdf import convert
 from pytesseract import pytesseract
 import os
+import pythoncom
+import win32com.client
 
 # Component used for data extraction from text.
 def extract(type, link):
@@ -38,9 +40,20 @@ def extract(type, link):
         result = result.replace("\x0c", "")
         tmp_type = "PDF"
     elif type == 4:  # Document file
+        xl = win32com.client.Dispatch("Word.Application", pythoncom.CoInitialize())
         convert(link, output_path="temp/output.pdf")
         tmp_type = "Document"
-        result = extract(3, "temp/output.pdf")
+        link = "temp/output.pdf"
+        fileObj = fitz.open(link)
+        result = ""
+        for page in fileObj:
+            result += page.get_text() + chr(12)
+        tmp_type = "PDF"
+        result = result.encode("ascii", "ignore")
+        result = result.decode()
+        result = result.replace("\x92", "")
+        result = result.replace("\x0c", "")
+        fileObj.close()
         os.remove("temp/output.pdf")
     else:
         return {"error": "Invalid type"}

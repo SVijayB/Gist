@@ -1,10 +1,9 @@
-
 from docx2pdf import convert
 import fitz
 
 
 def extract_from_file(filename):
-    fileObj = fitz.open('UserFiles/' + filename)
+    fileObj = fitz.open("temp_files/" + filename)
     result = ""
     for page in fileObj:
         result += page.get_text() + chr(12)
@@ -18,5 +17,8 @@ def extract_from_file(filename):
 
 
 def extract_from_docx(filename):
-    convert(f"UserFiles/{filename}", output_path=f"UserFiles/{filename.split('.')[0]}.pdf")
+    convert(
+        f"temp_files/{filename}",
+        output_path=f"temp_files/{filename.split('.')[0]}.pdf",
+    )
     return extract_from_file(f"{filename.split('.')[0]}.pdf")

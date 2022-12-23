@@ -162,6 +162,6 @@ cython_debug/
 temp/
 
 
-UserFiles
+temp_files
 
 src/routes/gmail/client_secret.json
