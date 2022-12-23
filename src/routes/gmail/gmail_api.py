@@ -8,6 +8,8 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from .serialzer import HeaderParser
 from .gmailResult import GmailSummarizer
+from .sendMail import payloadPrep
+
 
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 
@@ -87,8 +89,9 @@ def user_redirect():
 
         # print(responses)
         print(f"Sending Mail to {email_address}")
-        GmailSummarizer(responses, email_address)
-
+        file = GmailSummarizer(responses)
+        payloadPrep(email_address, ("temp\\" + file))
+        print("[!] Server logs: Mail sent successfully")
         return "Request successful", 200
     except Exception as e:
         print(e)

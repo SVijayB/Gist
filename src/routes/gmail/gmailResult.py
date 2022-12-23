@@ -11,24 +11,25 @@ import re
 import win32com.client
 
 
-def GmailSummarizer(responses, email_address):
+def GmailSummarizer(responses):
     start = time.time()
-    # for email in responses:
-    #     email["content"] = email["content"].replace("\n", " ")
-    #     email["content"] = email["content"].replace("\r", " ")
-    #     email["content"] = email["content"].replace("\t", " ")
-    #     summarizer.summarize(email, title=False)
+    for email in responses:
+        email["content"] = email["content"].replace("\n", " ")
+        email["content"] = email["content"].replace("\r", " ")
+        email["content"] = email["content"].replace("\t", " ")
+        summarizer.summarize(email, title=False)
 
-    # json_object = json.dumps(responses, indent=4)
-    # with open("sample.json", "w") as outfile:
-    #     outfile.write(json_object)
-    f = open("sample.json")
-    responses = json.load(f)
-    f.close()
+    json_object = json.dumps(responses, indent=4)
+    with open("sample.json", "w") as outfile:
+        outfile.write(json_object)
+    # f = open("sample.json")
+    # responses = json.load(f)
+    # f.close()
+    # print("Completed Summarization")
     return pdf_generator(responses, start)
 
 
-def pdf_generator(responses, email_address, start):
+def pdf_generator(responses, start):
     print("[!] Server logs: Result Generation started")
     document = Document()
 
@@ -38,7 +39,8 @@ def pdf_generator(responses, email_address, start):
     r.add_picture("assets/report_logo.jpeg")
 
     ID = open("assets/ID.txt", "r").read()
-    now = time.time()
+    tmp_time = time.time()
+    now = datetime.now()
     DateAndTime = now.strftime("%d/%m/%Y %H:%M:%S")
 
     updated_ID = int(ID) + 1
@@ -60,11 +62,13 @@ def pdf_generator(responses, email_address, start):
     document.add_heading("Results", 0)
 
     document.add_heading("Gist Gmail Summary")
-    document.add_paragraph("Type : " + "Gmail Summary")
+    document.add_paragraph("Type : " + "Gmail Summarization")
 
     document.add_heading("Execution Time")
-    summarizer_time = time.time() - start - now
-    document.add_paragraph("Summarization : " + str(summarizer_time) + " seconds")
+    summarizer_time = tmp_time - start
+    document.add_paragraph(
+        "Time taken for summarization : " + str(round(summarizer_time, 3)) + " seconds"
+    )
 
     document.add_heading("Emails summarized")
     document.add_paragraph("Number of Emails summarized : " + str(len(responses)))
@@ -74,14 +78,12 @@ def pdf_generator(responses, email_address, start):
     document.add_heading("Report", 0)
 
     for data in responses:
-        document.add_heading("Email ID : " + data["id"], 1)
-        document.add_heading("Email Subject : " + data["meta"]["Subject"], 1)
-        document.add_heading("Email From : " + data["meta"]["from"], 1)
-        document.add_heading("Recieved at : " + data["meta"]["Date"], 1)
-        document.add_heading("Email Content", 2)
-        document.add_paragraph(data["content"])
+        document.add_heading("Email ID : " + str(responses.index(data) + 1), 1)
+        document.add_paragraph("Subject : " + data["meta"]["Subject"])
+        document.add_paragraph("Email From : " + data["meta"]["from"])
+        document.add_paragraph("Recieved at : " + str(data["meta"]["Date"])[:-6])
 
-        document.add_heading("Email Summary", 2)
+        document.add_paragraph("Summary Generated : ")
         document.add_paragraph(data["summary"])
         document.add_paragraph("                              ")
         document.add_paragraph(
