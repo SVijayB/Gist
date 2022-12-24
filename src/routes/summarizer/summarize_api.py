@@ -26,6 +26,7 @@ def summarize():
     result["start_time"] = current_time
     result["extraction_time"] = round(extraction_time, 3)
     result["summarizer_time"] = round(summarizer_time, 3)
+
     if report != None and report == str(1):
         filepath = os.path.abspath(os.getcwd()) + "/temp"
         pdf_result = result_generation(result)
@@ -61,9 +62,6 @@ def pdf_generator(data, report):
     summarizer_time = time.time() - start_time - extraction_time
     if report != None and report == str(1):
         filepath = os.path.abspath(os.getcwd()) + "/temp"
-        result["start_time"] = current_time
-        result["extraction_time"] = round(extraction_time, 3)
-        result["summarizer_time"] = round(summarizer_time, 3)
         pdf_result = result_generation(result)
         return send_from_directory(filepath, pdf_result)
     return jsonify(result)
