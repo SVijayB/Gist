@@ -4,9 +4,8 @@ import './Banner.css'
 function Item(props){
   
     return(
-         <div className='Banner_text' onClick={props.clickHandler}>
+         <div className='Banner_text ' id={props.bckId} onClick={props.clickHandler}>
             <div className='Banner_header'>{props.heading}</div>
-            <div className='Banner_txt'>{props.about}</div>
          </div>
 
     );
@@ -34,9 +33,9 @@ function Banner(props){
           <div className="Banner_Section" id="products&s">
             <div className='Team PandS'> Product and Service</div>
             <div className="Banner_Container">
-                <Item heading="Summarizer" about={aboutSummarizer} clickHandler={RouteHandler.bind(this,"/api")} />
-                <Item heading="GIST" about={aboutGist} clickHandler={RouteHandler.bind(this,"/gist")} />
-                <Item heading="Gmail Summarizer" about={aboutGmail} clickHandler={RouteHandler.bind(this,"/gmail")}/>
+                <Item heading="Summarizer" bckId='gistbackg'  about={aboutSummarizer} clickHandler={RouteHandler.bind(this,"/api")} />
+                <Item heading="GIST"  bckId="newsbackg" about={aboutGist} clickHandler={RouteHandler.bind(this,"/gist")} />
+                <Item heading="Gmail Summarizer" bckId="gmailsbackg" about={aboutGmail} clickHandler={RouteHandler.bind(this,"/gmail")}/>
             </div>
           </div>
         </>
