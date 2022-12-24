@@ -4,20 +4,22 @@ import './Banner.css'
 function Item(props){
   
     return(
-         <div className='Banner_text' onClick={props.clickHandler}>
+         <div className='Banner_text ' id={props.bckId} onClick={props.clickHandler}>
             <div className='Banner_header'>{props.heading}</div>
-            <div className='Banner_txt'><p>{props.about}</p></div>
          </div>
 
     );
 
 }
-const about=`Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain  
-Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain `
+
 
 
 
 function Banner(props){
+
+    const aboutSummarizer =`For summarizing text, files, and news articles `
+    const aboutGist = `Get one minute summary of news articles using gist `
+    const aboutGmail = `Get a summary of your mails using Gmail Summarizer`
     
     const navg=useNavigate();
 
@@ -31,9 +33,9 @@ function Banner(props){
           <div className="Banner_Section" id="products&s">
             <div className='Team PandS'> Product and Service</div>
             <div className="Banner_Container">
-                <Item heading="Summarizer" about={about} clickHandler={RouteHandler.bind(this,"/api")} />
-                <Item heading="GIST" about={about} clickHandler={RouteHandler.bind(this,"/gist")} />
-                <Item heading="Gmail Summarizer" about={about} clickHandler={RouteHandler.bind(this,"/gmail")}/>
+                <Item heading="Summarizer" bckId='gistbackg'  about={aboutSummarizer} clickHandler={RouteHandler.bind(this,"/api")} />
+                <Item heading="GIST"  bckId="newsbackg" about={aboutGist} clickHandler={RouteHandler.bind(this,"/gist")} />
+                <Item heading="Gmail Summarizer" bckId="gmailsbackg" about={aboutGmail} clickHandler={RouteHandler.bind(this,"/gmail")}/>
             </div>
           </div>
         </>

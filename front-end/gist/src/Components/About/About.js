@@ -22,10 +22,9 @@ function About(){
                  </div>
                  <div id="abt_txt">
                     <h5>
-                        Nulla pellentesque sapien risus, at dapibus sem condimentum sed. Quisque sed risus in felis porta rhoncus ac vel quam. 
-                        Vivamus faucibus tincidunt libero ut blandit. Etiam ultricies mi vitae quam scelerisque rhoncus. Aenean eget purus facilisis, 
-                        dictum lectus eu, luctus nunc. Praesent est risus, 
-                        commodo a ex vel, imperdiet rhoncus ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                       Gist is an online open-source tool that summarizes text, files, images and news articles
+                        from several news sources using highly advanced artificial inteligence and NLP. 
+                        Gist also summarizes mails for a quick overview of your gmail content in a glance.
                     </h5>
                  </div>
                  <div id="abt_btn">
