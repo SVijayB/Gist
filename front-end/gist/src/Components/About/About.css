@@ -29,6 +29,7 @@ padding-top: 80px;
 }
 .abt_text{
     flex-direction: column;
+    padding: 20px;
 }
 
 .abt_img img{

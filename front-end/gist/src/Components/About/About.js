@@ -22,10 +22,8 @@ function About(){
                  </div>
                  <div id="abt_txt">
                     <h5>
-                        Nulla pellentesque sapien risus, at dapibus sem condimentum sed. Quisque sed risus in felis porta rhoncus ac vel quam. 
-                        Vivamus faucibus tincidunt libero ut blandit. Etiam ultricies mi vitae quam scelerisque rhoncus. Aenean eget purus facilisis, 
-                        dictum lectus eu, luctus nunc. Praesent est risus, 
-                        commodo a ex vel, imperdiet rhoncus ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        The gist is an online open-source tool for summarizing text, files, and news articles using our  Summarizer 
+                        Get one minute summary of news articles using gist and Get a summary of your mails using Gmail Summarizer
                     </h5>
                  </div>
                  <div id="abt_btn">

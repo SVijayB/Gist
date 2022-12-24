@@ -84,3 +84,6 @@ align-items: center;
     padding: 4px;
     background-color: #16181d;
 }
+.footer_logo h6{
+    cursor: pointer;
+}
