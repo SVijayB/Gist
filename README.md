@@ -73,6 +73,8 @@ For using the front-end, you'll need to make sure you have node installed. Once 
 
 ## Usage
 
+<img src="assets/result.png">
+
 Once all the dependencies for both the front-end and back-end is completed you need to create a `.env` file in the root directory of the project. \
 The .env file should contain the same variables as `.env.example`.
 Once that is done, launch the back-end server. To do this, run the following command in the root directory of the project.
@@ -87,7 +89,9 @@ Once the back-end is running successfully, you can launch the front-end by runni
 npm start
 </pre>
 
-P.S: You can also find the thesis for the project [here](assets\Thesis.pdf).
+P.S: You can also find the thesis for the project [here](https://github.com/SVijayB/Gist/blob/main/assets/Thesis.pdf).
+
+You can also find some of the results generated [here](https://github.com/SVijayB/Gist/blob/main/assets/Result_0001.pdf) and [here](https://github.com/SVijayB/Gist/blob/main/assets/Result_0003.pdf).
 
 ## Contributing
 
