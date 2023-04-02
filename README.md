@@ -36,7 +36,6 @@
 -   [Motivation](#Motivation)
 -   [Installation](#Installation)
 -   [Usage](#Usage)
-    -   [Project Demo](#Demo)
 -   [Contributing](#Contributing)
 -   [License](#License)
 
@@ -44,12 +43,16 @@
 
 <img src="assets/News.png">
 
-Our project focuses on creating an accurate text summarizer for news articles. We developed an API that uses various NLP models to acquire a summary of an entire news article. While the API can be potentially used for various other cases including, Movie and book summaries, e-commerce product review summaries, and so on.
+Gist started out as a project built as part of NMIT Hacks 2021 and even came runners up! \*wink wink\* \
+It was then further developed with improved models, an added front-end and features enhanced.
+Gist started as a simple prototype to easily and efficiently summarize any news article into 60 or lesser words for quicker grasp of data, but since then it has come a long way.
 
-Our product Gist focuses on a small part of it for newspaper summarization. This is why we have open-sourced our project for it to be used by people as per their requirements and scope. \
-The main difference between our summarizer and other summarizers already in the market is that ours is an abstractive type rather than extractive, which means, it focuses on creating and framing it's own summaries rather than just focusing on points which are relevant and copy pasting them in the summary.
+Today Gist hosts 3 seperate applications, each with their own unique functionalities, yet derived from the same core. \
+Gist Core API summarizes content from text, documents, pdfs, images so you can upload your physical news paper! And even other online news websites. This helps you consume important data much quicker.
 
-Built as part of the NMIT Hacks 2022 (We won second place!).
+Gist at it's heart is an application that acts as a medium where you can read several 60 or lesser word news articles in one place, similar to that of inShorts.
+
+And finally the Gmail Summarizer which was built to quickly get insights on your email data as it becomes harder to keep track of the infinite mails we recieve everyday. And thanks to the devs for making Gist open source, it can be easily accessed and updated by users from around the world and it's features only growing everyday!
 
 ## Installation
 
@@ -70,6 +73,8 @@ For using the front-end, you'll need to make sure you have node installed. Once 
 
 ## Usage
 
+<img src="assets/result.png">
+
 Once all the dependencies for both the front-end and back-end is completed you need to create a `.env` file in the root directory of the project. \
 The .env file should contain the same variables as `.env.example`.
 Once that is done, launch the back-end server. To do this, run the following command in the root directory of the project.
@@ -83,6 +88,8 @@ Once the back-end is running successfully, you can launch the front-end by runni
 <pre>
 npm start
 </pre>
+
+P.S: You can also find the thesis for the project [here](assets\Thesis.pdf).
 
 ## Contributing
 
