@@ -89,9 +89,9 @@ Once the back-end is running successfully, you can launch the front-end by runni
 npm start
 </pre>
 
-P.S: You can also find the thesis for the project [here](assets\Thesis.pdf).
+P.S: You can also find the thesis for the project [here](https://github.com/SVijayB/Gist/blob/main/assets/Thesis.pdf).
 
-You can also find some of the results generated [here](assets\Result_0001.pdf) and [here](assets\Result_0003.pdf).
+You can also find some of the results generated [here](https://github.com/SVijayB/Gist/blob/main/assets/Result_0001.pdf) and [here](https://github.com/SVijayB/Gist/blob/main/assets/Result_0003.pdf).
 
 ## Contributing
 
