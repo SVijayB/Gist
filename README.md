@@ -1,21 +1,35 @@
 # Gist
 
 <p align="center">
-    <img src="assets/logo.jpeg" alt="Logo" border="0">
+    <img src="assets/logo.jpeg" alt="Logo" border="0" width="600">
     <br>Gist: Less is more | A text summarizer
 </p>
 
 ---
 
-[![GitHub pull-requests](https://img.shields.io/github/issues-pr/SVijayB/Gist.svg)](https://github.com/SVijayB/Gist/pulls)
-[![GitHub issues](https://img.shields.io/github/issues/SVijayB/Gist.svg)](https://github.com/SVijayB/Gist/issues)
-[![GitHub contributors](https://img.shields.io/github/contributors/SVijayB/Gist.svg)](https://github.com/SVijayB/Gist/graphs/contributors)
-
-[![GitHub license](https://img.shields.io/github/license/SVijayB/Gist)](https://github.com/SVijayB/Gist/blob/master/LICENSE)
-[![GitHub repo size](https://img.shields.io/github/repo-size/SVijayB/Gist)](https://github.com/SVijayB/Gist)
-
-[![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat)](https://github.com/SVijayB/Gist/blob/master/.github/CODE_OF_CONDUCT.md)
-[![Open Source Love svg1](https://img.shields.io/static/v1?label=Open&message=Source%20%E2%9D%A4%EF%B8%8F&color=blueviolet)](https://github.com/SVijayB/Gist/blob/master/.github/CONTRIBUTING.md)
+<p align="center">
+    <a href="https://github.com/SVijayB/Gist/pulls">
+        <img src="https://img.shields.io/github/issues-pr/SVijayB/Gist.svg?style=for-the-badge&amp;logo=opencollective" alt="GitHub pull-requests">
+    </a>
+<a href="https://github.com/SVijayB/Gist/issues">
+    <img src="https://img.shields.io/github/issues/SVijayB/Gist.svg?style=for-the-badge&amp;logo=testcafe" alt="GitHub issues">
+    </a>
+<a href="https://github.com/SVijayB/Gist/graphs/contributors">
+    <img src="https://img.shields.io/github/contributors/SVijayB/Gist.svg?style=for-the-badge&amp;logo=bandsintown" alt="GitHub contributors">
+    </a>
+<a href="https://github.com/SVijayB/Gist/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/SVijayB/Gist?style=for-the-badge&amp;logo=appveyor" alt="GitHub license">
+    </a>
+<a href="https://github.com/SVijayB/Gist">
+    <img src="https://img.shields.io/github/repo-size/SVijayB/Gist?style=for-the-badge&amp;logo=git" alt="GitHub repo size">
+    </a>
+<a href="https://github.com/SVijayB/Gist/blob/master/.github/CODE_OF_CONDUCT.md">
+    <img src="https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=for-the-badge&amp;logo=crowdsource" alt="Code of Conduct">
+    </a>
+<a href="https://github.com/SVijayB/Gist/blob/master/.github/CONTRIBUTING.md">
+    <img src="https://img.shields.io/static/v1?style=for-the-badge&amp;logo=opensourceinitiative&amp;label=Open&amp;message=Source%20%E2%9D%A4%EF%B8%8F&amp;color=blueviolet" alt="Open Source Love svg1">
+    </a>
+</p>
 
 ## Table of Contents
 
@@ -27,6 +41,8 @@
 -   [License](#License)
 
 ## Motivation
+
+<img src="assets/News.png">
 
 Our project focuses on creating an accurate text summarizer for news articles. We developed an API that uses various NLP models to acquire a summary of an entire news article. While the API can be potentially used for various other cases including, Movie and book summaries, e-commerce product review summaries, and so on.
 
@@ -50,22 +66,23 @@ Enter the virtual environment and install dependancies using `pip install -r req
 
 Your installation is completed and you are all set to use the API.
 
+For using the front-end, you'll need to make sure you have node installed. Once you have node installed, you can install the dependencies using `npm install` in the `frontend\gist` folder.
+
 ## Usage
 
-To launch the file, use the following command, `python3 main.py` in the project folder.
+Once all the dependencies for both the front-end and back-end is completed you need to create a `.env` file in the root directory of the project. \
+The .env file should contain the same variables as `.env.example`.
+Once that is done, launch the back-end server. To do this, run the following command in the root directory of the project.
 
-This should launch the API. Some of the endpoints are as follows,
+<pre>
+py main.py
+</pre>
 
-| ID  | Endpoint        | Example                             | Details                                        |
-| --- | --------------- | ----------------------------------- | ---------------------------------------------- |
-| 1   | [/]             | http://127.0.0.1:5000/              | Index.                                         |
-| 2   | [api/extract]   | http://127.0.0.1:5000/api/extract   | Extracts text data based on the input provided |
-| 3   | [api/summarize] | http://127.0.0.1:5000/api/summarize | GET Summary of the text sent                   |
-| 4   | [api/category]  | http://127.0.0.1:5000/api/category  | GET the category to which the article belongs  |
+Once the back-end is running successfully, you can launch the front-end by running the following command in the `frontend\gist` folder.
 
-**Note:** It is mandatory to provide the `type` and `link` parameters in the request. \
-`type`: 1 - Article URL, 2 - Image. \
-`link`: URL of the article or image (Location on your system).
+<pre>
+npm start
+</pre>
 
 ## Contributing
 
