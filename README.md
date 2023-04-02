@@ -91,6 +91,8 @@ npm start
 
 P.S: You can also find the thesis for the project [here](assets\Thesis.pdf).
 
+You can also find some of the results generated [here](assets\Result_0001.pdf) and [here](assets\Result_0003.pdf).
+
 ## Contributing
 
 To contribute to Gist, fork the repository, create a new branch and send us a pull request. Make sure you read [CONTRIBUTING.md](https://github.com/SVijayB/Gist/blob/master/.github/CONTRIBUTING.md) before sending us Pull requests.
