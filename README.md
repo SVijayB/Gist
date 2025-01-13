@@ -43,7 +43,7 @@
 
 <img src="assets/News.png">
 
-Gist started out as a project built as part of NMIT Hacks 2021 and even came runners up! \*wink wink\* \
+Gist started out as a project built as part of NMIT Hacks 2021 and even came runners up! \
 It was then further developed with improved models, an added front-end and features enhanced.
 Gist started as a simple prototype to easily and efficiently summarize any news article into 60 or lesser words for quicker grasp of data, but since then it has come a long way.
 
